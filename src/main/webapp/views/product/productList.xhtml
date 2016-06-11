@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"     
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="title">
+                #{msgs.windowTitle} - #{msgs.product}
+            </ui:define>
+
+            <ui:define name="formTitle">
+                #{msgs.productListTitle}
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{productManagedBean.productList}" var="product" 
+                                 editable="true" resizableColumns="true" style="margin-top:20px; margin-bottom: 20px" 
+                                 paginator="true" rows="13" paginatorPosition="bottom"
+                                 widgetVar="productTable" emptyMessage="No product backlog found with given criteria">
+
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Search: " />
+                                <p:inputText id="globalFilter" onkeyup="PF('productTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                            </p:outputPanel>
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{productManagedBean.editProduct}" update=":form:msgs"/>
+                        <p:ajax event="rowEditCancel" listener="#{productManagedBean.cancelEditProduct}" update=":form:msgs"/>
+
+
+                        <p:column headerText="#{msgs.productId}" sortBy="#{product.id}"  filterBy="#{product.id}"  >
+                            <h:outputText value="#{product.id}" />
+                        </p:column>
+
+                        <p:column headerText="#{msgs.productName}" sortBy="#{product.name}"  filterBy="#{product.name}" filterMatchMode="contains"  >
+                            <h:outputText value="#{product.name}" />
+<!--                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="# {product.name}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="# {product.name}" style="width:100%" label="Year" required="true"/></f:facet>
+                            </p:cellEditor>-->
+                        </p:column>
+
+                        <p:column headerText="#{msgs.productStartDate}" sortBy="#{product.formatStartDate()}" style="width:105px">
+                            <h:outputText value="#{product.formatStartDate()}" />
+<!--                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="# {product.formatStartDate()}" /></f:facet>
+                                <f:facet name="input"><p:calendar value="# {product.formatStartDate()}" /></f:facet>
+                            </p:cellEditor>-->
+                        </p:column>
+
+                        <p:column headerText="#{msgs.productDueDate}" sortBy="#{product.formatDueDate()}" style="width:105px">
+                            <h:outputText value="#{product.formatDueDate()}" />
+                        </p:column>
+
+                        <p:column headerText="#{msgs.productDescription}" >
+                            <h:outputText value="#{product.description}" />
+                        </p:column>
+
+                        <p:column  filterBy="#{product.statusId.name}"  headerText="#{msgs.productStatus}" sortBy="#{product.statusId.name}" >
+                            <h:outputText value="#{product.statusId.name}" />
+                        </p:column>
+
+                        <p:column  filterBy="#{product.employeeId.firstname} #{product.employeeId.lastname}"  headerText="#{msgs.productOwner}" sortBy="# {product.employeeId.firstname} # {product.employeeId.lastname}">
+
+                            <h:outputText value="#{product.employeeId.firstname} #{product.employeeId.lastname}" />
+                        </p:column>
+
+                        <p:column style="width:25px">
+                            <p:rowEditor />
+                            <!--<p:commandLink action="# {productManagedBean.editProduct(# {product.id})}" value="Edit" />-->
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define> 
+        </ui:composition>
+    </h:body>
+</html>
