@@ -24,38 +24,37 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author akolom
  */
-
 @Entity
 public class User {
-    
-   
-    
-    
-    
-    
+
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	@Email(message = "Must be a valid email address")
-	private String email;
+    @Email(message = "Must  be a valid email address")
+    private String email;
 
-	@NotEmpty(message = "{NotEmpty}")
-	private String firstName;
+    @NotEmpty(message = "{NotEmpty}")
+    private String firstName;
 
-	private String lastName;
+    private String lastName;
 
-	private String contact;
+    private String contact;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Address> addresses;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_credentials")
+    private Credentials credentials;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Events> events;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_credentials")
-	private Credentials credentials;
-        @ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable
-        private List<Events> events;
+    public List<Events> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Events> events) {
+        this.events = events;
+    }
 
     public Integer getId() {
         return id;
@@ -97,14 +96,6 @@ public class User {
         this.contact = contact;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
     public Credentials getCredentials() {
         return credentials;
     }
@@ -112,8 +103,4 @@ public class User {
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
-
-    
-    
-    
 }

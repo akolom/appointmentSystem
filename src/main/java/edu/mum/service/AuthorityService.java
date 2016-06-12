@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mum.repository;
+package edu.mum.service;
 
-import edu.mum.domain.Address;
-import org.springframework.data.jpa.repository.JpaRepository;
+import edu.mum.domain.Authority;
 
 /**
  *
  * @author akolom
  */
-public interface AddressRepository extends JpaRepository<Address, Long>{
+public interface AuthorityService {
+
+    public Object findAll();
+
+    public Authority findOneByName(String name);
     
 }

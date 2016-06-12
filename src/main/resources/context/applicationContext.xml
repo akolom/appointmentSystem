@@ -53,7 +53,7 @@
  
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-    <jpa:repositories base-package="edu.mum.repository"
+<!--    <jpa:repositories base-package="edu.mum.repository"
                       entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager" />
+                      transaction-manager-ref="transactionManager" />-->
 </beans>

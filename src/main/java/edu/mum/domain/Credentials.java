@@ -18,31 +18,25 @@ import javax.persistence.OneToOne;
  *
  * @author akolom
  */
-
 @Entity
 public class Credentials {
-    
-    
-    
-    
+
     @Id
-	@GeneratedValue
-	private Integer id;
+    @GeneratedValue
+    private Integer id;
 
-	private String userName;
+    private String userName;
 
-	private String password;
+    private String password;
 
-	private boolean enabled;
+    private boolean enabled;
 
-	private String verifyPassword;
+    @OneToOne(mappedBy = "credentials", fetch = FetchType.EAGER)
+    private User user;
 
-	@OneToOne(mappedBy = "credentials", fetch = FetchType.EAGER)
-	private User user;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "credentials")
-	private Authority authority;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "credentials")
+    private Authority authority;
 
     public Integer getId() {
         return id;
@@ -76,14 +70,6 @@ public class Credentials {
         this.enabled = enabled;
     }
 
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
-
     public User getUser() {
         return user;
     }
@@ -99,7 +85,5 @@ public class Credentials {
     public void setAuthority(Authority authority) {
         this.authority = authority;
     }
-    
-        
-    
+
 }

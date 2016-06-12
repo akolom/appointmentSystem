@@ -19,7 +19,7 @@ public interface EventService {
 
 	public List<Events> findAll(Integer userId);
 
-	void saveProject(Events event);
+	void saveEvent(Events event);
 
 //	List<Events> findAllByUser(User user);
 //
