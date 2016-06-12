@@ -31,8 +31,8 @@ public class Main {
     MemberService memberService = (MemberService) ctx.getBean("memberServiceImpl");
  
     Authority authority = new Authority();
-    authority.setAuthority("ROLE_USER");
-    authority.setUsername("Sean");
+    authority.setRole("ROLE_USER");
+    authority.setName("Sean");
     
 
     UserCredentials userCredentials = new UserCredentials();
@@ -69,8 +69,8 @@ public class Main {
     // THIS IS BILL
 
      authority = new Authority();
-    authority.setAuthority("ROLE_ADMIN");
-    authority.setUsername("Bill");
+    authority.setRole("ROLE_ADMIN");
+    authority.setName("Bill");
     
 
      userCredentials = new UserCredentials();
@@ -105,8 +105,8 @@ public class Main {
      // THIS is PETE
      
      authority = new Authority();
-    authority.setAuthority("ROLE_USER");
-    authority.setUsername("Pete");
+    authority.setRole("ROLE_USER");
+    authority.setName("Pete");
     
 
      userCredentials = new UserCredentials();

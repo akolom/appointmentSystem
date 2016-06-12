@@ -1,41 +1,59 @@
 package edu.mum.domain;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Authority {
+public class Authority implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4368824560841714481L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	@GeneratedValue
+	private Integer id;
+	
+	private String name;
 
-	private String username;
-  	@Column(nullable = false)
- 	private String authority;
- 	
-	 public long getId() {
+	private boolean enabled;
+
+	private String role;
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getRole() {
+		return role;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setRole(String role) {
+		this.role = role;
 	}
-	public String getAuthority() {
-		return authority;
+
+	public String getName() {
+		return name;
 	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
+
+	public void setName(String name) {
+		this.name = name;
 	}
- 
- 	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 }
