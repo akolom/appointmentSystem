@@ -6,6 +6,7 @@
 package edu.mum.domain;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author akolom
  */
 @Entity
-public class Events {
+public class Event {
 
     @Id
     @GeneratedValue
@@ -111,6 +112,14 @@ public class Events {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String formatStartDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(startTime);
+    }
+
+    public String formatDueDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(endTime);
     }
 
 }

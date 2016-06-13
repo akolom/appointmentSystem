@@ -16,20 +16,20 @@ and open the template in the editor.
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="title">
-                #{msgs.windowTitle} - #{msgs.product}
+                #{msgs.windowTitle} - #{msgs.event}
             </ui:define>
 
             <ui:define name="formTitle">
-                #{msgs.productListTitle}
+                #{msgs.eventListTitle}
             </ui:define>
 
             <ui:define name="content">
                 <h:form id="form">
                     <p:growl id="msgs" showDetail="true"/>
-                    <p:dataTable value="#{productManagedBean.productList}" var="product" 
+                    <p:dataTable value="#{eventManagedBean.eventList}" var="event" 
                                  editable="true" resizableColumns="true" style="margin-top:20px; margin-bottom: 20px" 
                                  paginator="true" rows="13" paginatorPosition="bottom"
-                                 widgetVar="productTable" emptyMessage="No product backlog found with given criteria">
+                                 widgetVar="eventTable" emptyMessage="No event backlog found with given criteria">
 
                         <f:facet name="header">
                             <p:outputPanel>
@@ -38,50 +38,52 @@ and open the template in the editor.
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:ajax event="rowEdit" listener="#{productManagedBean.editProduct}" update=":form:msgs"/>
-                        <p:ajax event="rowEditCancel" listener="#{productManagedBean.cancelEditProduct}" update=":form:msgs"/>
+                        <p:ajax event="rowEdit" listener="#{eventManagedBean.editEvent(event)}" update=":form:msgs"/>
+                        <p:ajax event="rowEditCancel" listener="#{eventManagedBean.cancelEditEvent(event)}" update=":form:msgs"/>
 
 
-                        <p:column headerText="#{msgs.productId}" sortBy="#{product.id}"  filterBy="#{product.id}"  >
-                            <h:outputText value="#{product.id}" />
+                        <p:column headerText="#{msgs.eventId}" sortBy="#{event.id}"  filterBy="#{event.id}"  >
+                            <h:outputText value="#{event.id}" />
                         </p:column>
 
-                        <p:column headerText="#{msgs.productName}" sortBy="#{product.name}"  filterBy="#{product.name}" filterMatchMode="contains"  >
-                            <h:outputText value="#{product.name}" />
+                        <p:column headerText="#{msgs.eventName}" sortBy="#{event.name}"  filterBy="#{event.name}" filterMatchMode="contains"  >
+                            <h:outputText value="#{event.name}" />
 <!--                            <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="# {product.name}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="# {product.name}" style="width:100%" label="Year" required="true"/></f:facet>
                             </p:cellEditor>-->
                         </p:column>
 
-                        <p:column headerText="#{msgs.productStartDate}" sortBy="#{product.formatStartDate()}" style="width:105px">
-                            <h:outputText value="#{product.formatStartDate()}" />
+                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}" style="width:105px">
+                            <h:outputText value="#{event.formatStartDate()}" />
 <!--                            <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="# {product.formatStartDate()}" /></f:facet>
                                 <f:facet name="input"><p:calendar value="# {product.formatStartDate()}" /></f:facet>
                             </p:cellEditor>-->
                         </p:column>
 
-                        <p:column headerText="#{msgs.productDueDate}" sortBy="#{product.formatDueDate()}" style="width:105px">
-                            <h:outputText value="#{product.formatDueDate()}" />
+                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}" style="width:105px">
+                            <h:outputText value="#{event.formatDueDate()}" />
                         </p:column>
 
-                        <p:column headerText="#{msgs.productDescription}" >
-                            <h:outputText value="#{product.description}" />
+                        <p:column headerText="#{msgs.eventDescription}" >
+                            <h:outputText value="#{event.description}" />
                         </p:column>
-
+                        <ui:remove>  
                         <p:column  filterBy="#{product.statusId.name}"  headerText="#{msgs.productStatus}" sortBy="#{product.statusId.name}" >
                             <h:outputText value="#{product.statusId.name}" />
                         </p:column>
+</ui:remove>
+                        
+                        <ui:remove>  
+                        <p:column  filterBy="#{event.userId.firstname} #{event.userId.lastname}"  headerText="#{msgs.eventOwner}" sortBy="# {event.userId.firstname} # {event.userId.lastname}">
 
-                        <p:column  filterBy="#{product.employeeId.firstname} #{product.employeeId.lastname}"  headerText="#{msgs.productOwner}" sortBy="# {product.employeeId.firstname} # {product.employeeId.lastname}">
-
-                            <h:outputText value="#{product.employeeId.firstname} #{product.employeeId.lastname}" />
+                            <h:outputText value="#{event.userId.firstname} #{event.userId.lastname}" />
                         </p:column>
-
+</ui:remove>
                         <p:column style="width:25px">
                             <p:rowEditor />
-                            <!--<p:commandLink action="# {productManagedBean.editProduct(# {product.id})}" value="Edit" />-->
+                            <p:commandLink action="# {eventManagedBean.editProduct(# {event.id})}" value="Edit" />
                         </p:column>
 
                     </p:dataTable>

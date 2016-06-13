@@ -5,7 +5,7 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Events;
+import edu.mum.domain.Event;
 import edu.mum.domain.User;
 import java.util.List;
 
@@ -30,11 +30,11 @@ public interface UserService {
 
 	
 
-	public void removeEventsFromUser(User u, Events events);
+	public void removeEventsFromUser(User u, Event events);
 
 	
 
-	public void saveUserInEvents(Events Events, User user);
+	public void saveUserInEvents(Event Events, User user);
 
 	
 

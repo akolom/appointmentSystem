@@ -5,7 +5,7 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Events;
+import edu.mum.domain.Event;
 import edu.mum.domain.User;
 import java.util.List;
 
@@ -15,25 +15,12 @@ import java.util.List;
  */
 public interface EventService {
     
-    public List<Events> findByDescription(String description);
+   
+    public List<Event> listEvent();
 
-	public List<Events> findAll(Integer userId);
+   
 
-	void saveEvent(Events event);
-
-//	List<Events> findAllByUser(User user);
-//
-//	Events findById(Integer id);
-
-	List<Events> findAllAppliedEvents(Integer userId);
-
-	List<Events> findAllNotAppliedEvents(String key, Integer userId);
-
-	
-
-//	public Events getEventsById(Integer eventId);
-
-	public void updateEvent(Events event);
+    public void createEvent(Event event);
 
     
 }

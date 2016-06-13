@@ -46,13 +46,17 @@ public class User {
     private Credentials credentials;
     
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Events> events;
+    private List<Event> events;
 
-    public List<Events> getEvents() {
+    public User(int uId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Events> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 

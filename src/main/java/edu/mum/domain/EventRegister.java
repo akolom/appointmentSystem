@@ -31,7 +31,7 @@ public class EventRegister {
     
     @ManyToOne()
     @JoinColumn(name="event_id")
-    private Events event;
+    private Event event;
     
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -53,11 +53,11 @@ public class EventRegister {
         this.id = id;
     }
 
-    public Events getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Events event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
