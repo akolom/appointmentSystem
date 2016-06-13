@@ -20,21 +20,19 @@ public interface UserService {
 
 	public List<User> findAll();
 
-	public User findByEmail(String email);
+	public void update(User user);
 
-	public User update(User user);
-
-	public User findOneByUsername(String userName);
-
-	public User findUserById(Integer id);
+//	public User findOneByUsername(String userName);
+//
+        public User findUserById(Integer id);
 
 	
 
-	public void removeEventsFromUser(User u, Events events);
-
-	
-
-	public void saveUserInEvents(Events Events, User user);
+//	public void removeEventsFromUser(User u, Events events);
+//
+//	
+//
+//	public void saveUserInEvents(Events Events, User user);
 
 	
 

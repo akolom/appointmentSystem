@@ -17,7 +17,6 @@ public class Authority implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
 	private String name;
 
 	private boolean enabled;

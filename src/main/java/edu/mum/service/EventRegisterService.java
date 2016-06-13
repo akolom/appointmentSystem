@@ -5,17 +5,10 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Authority;
-import java.util.List;
-
 /**
  *
- * @author akolom
+ * @author HAGOS
  */
-public interface AuthorityService {
-
-    //public List<Authority> findAll();
-
-    public Authority findOneByName(String name);
+public interface EventRegisterService {
     
 }

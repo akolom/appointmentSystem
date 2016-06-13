@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mum.service;
+package edu.mum.dao;
 
 import edu.mum.domain.Events;
-import edu.mum.domain.User;
 import java.util.List;
 
 /**
  *
- * @author akolom
+ * @author HAGOS
  */
-public interface EventService {
+public interface EventsDao {
+
+    
 
 
-    public List<Events> findAll(Integer userId);
-    public void update(Events event);
     public void save(Events event);
+    public void update(Events event);
+    public Events findById(Integer Id);
+    public List<Events> findAll();
+
+  
 
 }
