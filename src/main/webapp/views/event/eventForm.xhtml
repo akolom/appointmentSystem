@@ -51,7 +51,7 @@ and open the template in the editor.
                         <p:selectCheckboxMenu id="menu" value="#{eventManagedBean.eventBean.users}" label="Users"
                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <f:selectItems value="#{eventManagedBean.users}" var="user"
-                                           itemLabel="#{user.firstName}" itemValue="#{user.id}" />
+                                           itemLabel="#{user.firstName} #{user.lastName}" itemValue="#{user.id}" />
                         </p:selectCheckboxMenu>
                         <!--<p:commandLink value="Submit" update="display" />-->
                         <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />

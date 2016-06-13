@@ -78,7 +78,7 @@ public class InitServiceImpl {
 
         User user1 = new User();
         user1.setFirstName("steve");
-        user1.setFirstName("jobs");
+        user1.setLastName("jobs");
         user1.setEmail("jobs@gmail.com");
         user1.setContact("9898989898");
         user1.setCredentials(credentials1);

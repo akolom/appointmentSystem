@@ -6,6 +6,7 @@
 package edu.mum.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,8 +35,8 @@ public class Credentials implements Serializable{
     @OneToOne(mappedBy = "credentials", fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "credentials")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "authority_id")
     private Authority authority;
 
     public Integer getId() {
