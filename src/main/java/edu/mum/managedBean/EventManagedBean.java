@@ -7,7 +7,9 @@ package edu.mum.managedBean;
 
 import edu.mum.bean.EventBean;
 import edu.mum.domain.Event;
+import edu.mum.domain.User;
 import edu.mum.service.EventService;
+import edu.mum.service.UserService;
 import edu.mum.service.impl.EventServiceImpl;
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,7 +24,8 @@ import javax.inject.Named;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.primefaces.event.RowEditEvent;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -30,6 +33,7 @@ import org.primefaces.event.RowEditEvent;
  */
 @Named(value = "eventManagedBean")
 @ConversationScoped
+@Component
 public class EventManagedBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,19 +43,28 @@ public class EventManagedBean implements Serializable {
      */
     @Inject
     private EventBean eventBean;
-    
-   // @Inject
-    private EventService eventService= new EventServiceImpl();
-    
+
+    @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private UserService userService;
+
     private List<Event> eventList;
+    
+    private List<User> users;
+
     public EventManagedBean() {
     }
-    
-//    @PostConstruct
-//    public void init() {
-//        eventList = eventService.findAll(Integer.SIZE);
-//    }
 
+    @PostConstruct
+    public void init() {
+        eventList = eventService.findAll();
+        users = userService.findAll();
+    }
+    public void refreshUser(){
+        users = userService.findAll();
+    }
     public EventBean getEventBean() {
         return eventBean;
     }
@@ -68,6 +81,14 @@ public class EventManagedBean implements Serializable {
         this.eventService = eventService;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+    
     public List<Event> getEventList() {
         return eventService.findAll();
     }
@@ -75,32 +96,32 @@ public class EventManagedBean implements Serializable {
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
     }
-    
-     public String createEvent() {
+
+    public String createEvent() {
 
         int uId = Integer.valueOf(FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap().get("userId"));
 
         Mapper mapper = new DozerBeanMapper();
         //eventBean.setStatusId(new Status(statusId));
-       // eventBean.setUser(new User(uId));
+        // eventBean.setUser(new User(uId));
         Event event = mapper.map(eventBean, Event.class);
-       // product.setId(updateProductId);
+        // product.setId(updateProductId);
 
 //        if (updateProductId > 0) {
 //            productService.updateProduct(product);
 //            FacesMessage msg = new FacesMessage("Product Backlog Updated", String.valueOf(updateProductId));
 //            FacesContext.getCurrentInstance().addMessage(null, msg);
         //} else {
-            //eventService.save(event);
-            FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-       // }
+        //eventService.save(event);
+        FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        // }
 
         return "eventList.faces";
     }
-     
-     public void editEvent(RowEditEvent event) throws IOException {
+
+    public void editEvent(RowEditEvent event) throws IOException {
 //        FacesMessage msg = new FacesMessage("Product Backlog Edited", ((Product) event.getObject()).getId().toString());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //        Product tempProduct = (Product) event.getObject();
@@ -118,5 +139,5 @@ public class EventManagedBean implements Serializable {
 //        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Product) event.getObject()).getId().toString());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
 }

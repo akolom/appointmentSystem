@@ -24,7 +24,7 @@ and open the template in the editor.
             </ui:define>
 
             <ui:define name="content">
-
+                <f:event type="preRenderView" listener="#{eventManagedBean.refreshUser()}"/>
                 <h:form>
                     <p:growl id="msgs" showDetail="true"/>
 
@@ -35,25 +35,26 @@ and open the template in the editor.
                         <p:message for="name" />
 
                         <p:outputLabel for="startDate" value="#{msgs.eventStartDate}: " />
-                        <p:calendar id="startDate" value="#{eventManagedBean.eventBean.startTime}" />
+                        <p:calendar id="startDate" value="#{eventManagedBean.eventBean.startTime}" pattern="MM/dd/yyyy HH:mm" />
                         <p:message for="startDate" />
 
                         <p:outputLabel for="dueDate" value="#{msgs.eventDueDate}: " />
-                        <p:calendar id="dueDate" value="#{eventManagedBean.eventBean.endTime}" />
+                        <p:calendar id="dueDate" value="#{eventManagedBean.eventBean.endTime}" pattern="MM/dd/yyyy HH:mm"/>
                         <p:message for="dueDate" />
-<!--                        <ui:remove>
-                            <p:outputLabel for="status" value="#{msgs.eventStatus}" />
-                            <p:selectOneMenu id="status" value="#{productManagedBean.statusId}" >
-                                <f:selectItems value="#{productManagedBean.statusOption}" />
-                            </p:selectOneMenu>
-                            <p:message for="status" />-->
 
-                            <p:outputLabel for="description" value="#{msgs.eventDescription}" />
-                            <p:inputTextarea id="description" value="#{eventManagedBean.eventBean.description}" rows="3"/>
-                            <p:message for="description" />
+                        <p:outputLabel for="description" value="#{msgs.eventDescription}:" />
+                        <p:inputTextarea id="description" value="#{eventManagedBean.eventBean.description}" rows="3"/>
+                        <p:message for="description" />
+                        
 
-                            <h:panelGroup />
-                            <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />
+                        <h:outputLabel for="menu" value="#{msgs.eventUsers}:" />
+                        <p:selectCheckboxMenu id="menu" value="#{eventManagedBean.eventBean.users}" label="Users"
+                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                            <f:selectItems value="#{eventManagedBean.users}" var="user"
+                                           itemLabel="#{user.firstName}" itemValue="#{user.id}" />
+                        </p:selectCheckboxMenu>
+                        <!--<p:commandLink value="Submit" update="display" />-->
+                        <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />
 
                     </h:panelGrid>
 
@@ -63,3 +64,9 @@ and open the template in the editor.
         </ui:composition>
     </h:body>
 </html>
+<!--                        
+                                                    <p:outputLabel for="status" value="#{msgs.eventStatus}" />
+                                                    <p:selectOneMenu id="status" value="#{productManagedBean.statusId}" >
+                                                        <f:selectItems value="#{productManagedBean.statusOption}" />
+                                                    </p:selectOneMenu>
+                                                    <p:message for="status" />-->

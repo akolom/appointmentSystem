@@ -5,7 +5,7 @@
  */
 package edu.mum.domain;
 
-import java.sql.Time;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author akolom
  */
 @Entity
-public class Event {
+public class Event implements Serializable{
 
     @Id
     @GeneratedValue
@@ -39,7 +39,7 @@ public class Event {
     private String description;
 
     @ManyToMany(mappedBy = "events", fetch = FetchType.EAGER)
-    private List<User> user;
+    private List<User> users;
     
     @OneToMany(mappedBy="event" , cascade=CascadeType.ALL)
     private List<EventRegister>  eventDetails;
@@ -95,12 +95,12 @@ public class Event {
         this.duration = duration;
     }
 
-    public List<User> getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(List<User> user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     

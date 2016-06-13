@@ -1,9 +1,6 @@
 package edu.mum.dao.impl;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,8 +12,8 @@ import edu.mum.dao.GenericDao;
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @PersistenceContext
-    private EntityManager entityManager;
-     protected Class<T> daoType;
+    protected EntityManager entityManager;
+    protected Class<T> daoType;
 
     public EntityManager getEntityManager() {
         return entityManager;

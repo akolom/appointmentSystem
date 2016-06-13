@@ -5,6 +5,7 @@
  */
 package edu.mum.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author akolom
  */
 @Entity
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,6 +43,9 @@ public class User {
     private String contact;
     
     private boolean status;
+
+    public User() {
+    }
 
     public void setStatus(boolean status) {
         this.status = status;

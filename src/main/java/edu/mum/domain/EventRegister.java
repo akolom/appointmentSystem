@@ -5,6 +5,7 @@
  */
 package edu.mum.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
-public class EventRegister {
+public class EventRegister implements Serializable{
     
 //    private String description;
     

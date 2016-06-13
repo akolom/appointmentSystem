@@ -7,9 +7,7 @@ package edu.mum.service.impl;
 
 import edu.mum.dao.EventsDao;
 import edu.mum.domain.Event;
-import edu.mum.domain.User;
 import edu.mum.service.EventService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +23,6 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventsDao eventsDao;
-
-   
 
     @Override
     public List<Event> findAll() {

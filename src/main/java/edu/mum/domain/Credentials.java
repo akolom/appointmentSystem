@@ -5,7 +5,7 @@
  */
 package edu.mum.domain;
 
-import java.util.List;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ import javax.persistence.OneToOne;
  * @author akolom
  */
 @Entity
-public class Credentials {
+public class Credentials implements Serializable{
 
     @Id
     @GeneratedValue

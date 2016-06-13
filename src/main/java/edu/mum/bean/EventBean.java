@@ -5,7 +5,10 @@
  */
 package edu.mum.bean;
 
+import edu.mum.domain.User;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Future;
@@ -33,12 +36,13 @@ public class EventBean {
     @Future(message = "{eventbean_startdate_future}")
     private Date startTime;
 
-    @NotNull(message = "{eventbean_duedate_notnull}")
-    @Future(message = "{eventbean_duedate_future}")
+    @NotNull(message = "{eventbean_enddate_notnull}")
+    @Future(message = "{eventbean_endtdate_future}")
     private Date endTime;
 
     private String description;
-
+    private List<User> users=new ArrayList<>();
+    
     public String getName() {
         return name;
     }
@@ -70,6 +74,16 @@ public class EventBean {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+   
     
     
     

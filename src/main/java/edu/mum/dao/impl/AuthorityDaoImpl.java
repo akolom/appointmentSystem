@@ -8,19 +8,19 @@ package edu.mum.dao.impl;
 import edu.mum.dao.AuthorityDao;
 import edu.mum.domain.Authority;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author HAGOS
  */
+@Repository
 public class AuthorityDaoImpl extends GenericDaoImpl<Authority> implements AuthorityDao {
 
-    @PersistenceContext
-    protected EntityManager entityManager;
+    public AuthorityDaoImpl() {
+        super.setDaoType(Authority.class);
+    }
 
     @Override
     public Authority findOneByName(String name) {

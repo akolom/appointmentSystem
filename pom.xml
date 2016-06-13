@@ -19,10 +19,10 @@
     <dependencies>
         
         <dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.5.0-b01</version>
-		</dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -68,7 +68,7 @@
             <artifactId>spring-security-config</artifactId>
         </dependency>
         <!-- Spring Data JPA dependencies -->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
         </dependency>-->
@@ -121,8 +121,8 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <type>jar</type>
+            <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

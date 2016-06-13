@@ -8,9 +8,9 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd" version="2.0">
             <var>msgs</var>
         </resource-bundle>
         
-<!--        <el-resolver>
+        <el-resolver>
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
-        </el-resolver>-->
+        </el-resolver>
           
     </application> 
 </faces-config>
