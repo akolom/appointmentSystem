@@ -47,10 +47,10 @@ public class EventManagedBean implements Serializable {
     public EventManagedBean() {
     }
     
-    @PostConstruct
-    public void init() {
-        eventList = eventService.listEvent();
-    }
+//    @PostConstruct
+//    public void init() {
+//        eventList = eventService.findAll(Integer.SIZE);
+//    }
 
     public EventBean getEventBean() {
         return eventBean;
@@ -69,7 +69,7 @@ public class EventManagedBean implements Serializable {
     }
 
     public List<Event> getEventList() {
-        return eventService.listEvent();
+        return eventService.findAll();
     }
 
     public void setEventList(List<Event> eventList) {
@@ -92,7 +92,7 @@ public class EventManagedBean implements Serializable {
 //            FacesMessage msg = new FacesMessage("Product Backlog Updated", String.valueOf(updateProductId));
 //            FacesContext.getCurrentInstance().addMessage(null, msg);
         //} else {
-            eventService.createEvent(event);
+            //eventService.save(event);
             FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
             FacesContext.getCurrentInstance().addMessage(null, msg);
        // }

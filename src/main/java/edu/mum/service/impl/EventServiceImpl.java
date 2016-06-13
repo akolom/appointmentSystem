@@ -6,7 +6,7 @@
 package edu.mum.service.impl;
 
 import edu.mum.dao.EventsDao;
-import edu.mum.domain.Events;
+import edu.mum.domain.Event;
 import edu.mum.domain.User;
 import edu.mum.service.EventService;
 import java.util.ArrayList;
@@ -29,13 +29,13 @@ public class EventServiceImpl implements EventService {
    
 
     @Override
-    public List<Events> findAll(Integer userId) {
+    public List<Event> findAll() {
 
         return eventsDao.findAll();
     }
 
     @Override
-    public void save(Events event) {
+    public void save(Event event) {
         eventsDao.save(event);
 
     }
@@ -79,9 +79,11 @@ public class EventServiceImpl implements EventService {
 //    }
 
 
+    
+
     @Override
-    public void update(Events event) {
-        eventsDao.save(event);
+    public void update(Event event) {
+eventsDao.save(event);
     }
 
    

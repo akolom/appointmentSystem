@@ -5,7 +5,7 @@
  */
 package edu.mum.dao;
 
-import edu.mum.domain.Events;
+import edu.mum.domain.Event;
 import java.util.List;
 
 /**
@@ -16,11 +16,11 @@ public interface EventsDao {
 
     
 
-
-    public void save(Events event);
-    public void update(Events event);
-    public Events findById(Integer Id);
-    public List<Events> findAll();
+public List<Event> findAll();
+    public void save(Event event);
+    public void update(Event event);
+    public Event findById(Integer Id);
+  //  public List<Event> findAll();
 
   
 

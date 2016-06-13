@@ -6,7 +6,7 @@
 package edu.mum.service.impl;
 
 import edu.mum.dao.UserDao;
-import edu.mum.domain.Events;
+
 import edu.mum.domain.User;
 import edu.mum.service.UserService;
 import java.util.List;

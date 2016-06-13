@@ -6,11 +6,11 @@
 package edu.mum.dao.impl;
 
 import edu.mum.dao.EventsDao;
-import edu.mum.domain.Events;
+import edu.mum.domain.Event;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,23 +21,23 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
-public class EventsDaoImpl extends GenericDaoImpl<Events> implements EventsDao {
+public class EventsDaoImpl extends GenericDaoImpl<Event> implements EventsDao {
 
     @PersistenceContext
     private EntityManager entityManager;
     @Override
-    public Events findById(Integer Id) {
-        return entityManager.find(Events.class, Id);
+    public Event findById(Integer Id) {
+        return entityManager.find(Event.class, Id);
     }
 
     @Override
-    public List<Events> findAll() {
-        List<Events> events
-                = entityManager.createQuery("SELECT e FROM Events e", Events.class).getResultList();
+    public List<Event> findAll() {
+        List<Event> events
+                = entityManager.createQuery("SELECT e FROM Events e", Event.class).getResultList();
         return events;
     }
       @Override
-    public void save(Events events) {
+    public void save(Event events) {
         entityManager.persist(events);
     }
 

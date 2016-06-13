@@ -5,8 +5,8 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Events;
-import edu.mum.domain.User;
+import edu.mum.domain.Event;
+
 import java.util.List;
 
 /**
@@ -16,8 +16,8 @@ import java.util.List;
 public interface EventService {
 
 
-    public List<Events> findAll(Integer userId);
-    public void update(Events event);
-    public void save(Events event);
+    public List<Event> findAll();
+    public void update(Event event);
+    public void save(Event event);
 
 }

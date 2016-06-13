@@ -5,7 +5,7 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Events;
+
 import edu.mum.domain.User;
 import java.util.List;
 
