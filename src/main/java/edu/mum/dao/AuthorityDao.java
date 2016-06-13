@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mum.service;
+package edu.mum.dao;
 
 import edu.mum.domain.Authority;
-import java.util.List;
 
 /**
  *
- * @author akolom
+ * @author HAGOS
  */
-public interface AuthorityService {
+public interface AuthorityDao {
 
-    //public List<Authority> findAll();
 
     public Authority findOneByName(String name);
     

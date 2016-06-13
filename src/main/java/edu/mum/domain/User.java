@@ -40,6 +40,12 @@ public class User {
     private String lastName;
 
     private String contact;
+    
+    private boolean status;
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_credentials")

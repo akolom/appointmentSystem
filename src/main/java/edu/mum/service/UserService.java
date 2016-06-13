@@ -5,7 +5,7 @@
  */
 package edu.mum.service;
 
-import edu.mum.domain.Event;
+import edu.mum.domain.Events;
 import edu.mum.domain.User;
 import java.util.List;
 
@@ -20,21 +20,19 @@ public interface UserService {
 
 	public List<User> findAll();
 
-	public User findByEmail(String email);
+	public void update(User user);
 
-	public User update(User user);
-
-	public User findOneByUsername(String userName);
-
-	public User findUserById(Integer id);
+//	public User findOneByUsername(String userName);
+//
+        public User findUserById(Integer id);
 
 	
 
-	public void removeEventsFromUser(User u, Event events);
-
-	
-
-	public void saveUserInEvents(Event Events, User user);
+//	public void removeEventsFromUser(User u, Events events);
+//
+//	
+//
+//	public void saveUserInEvents(Events Events, User user);
 
 	
 

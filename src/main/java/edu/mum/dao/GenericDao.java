@@ -19,11 +19,11 @@ public interface GenericDao<T> {
 
     T findOne(Long id);
 
-    T update(T t);   
+    void update(T t);   
     
-    List<T> findAll();
+    public List<T> findAll();
 
-	public List<T> findAll(String s,Object  hint );
+    public List<T> findAll(String s,Object  hint );
 
     
     

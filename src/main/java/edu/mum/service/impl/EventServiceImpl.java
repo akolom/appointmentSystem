@@ -5,38 +5,87 @@
  */
 package edu.mum.service.impl;
 
-import edu.mum.domain.Event;
+import edu.mum.dao.EventsDao;
+import edu.mum.domain.Events;
+import edu.mum.domain.User;
 import edu.mum.service.EventService;
+import java.util.ArrayList;
 import java.util.List;
-import static javafx.scene.input.KeyCode.T;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author akolom
  */
-public class EventServiceImpl implements EventService{
+@Service
+@Transactional
+public class EventServiceImpl implements EventService {
 
-    @PersistenceContext
-    protected EntityManager entityManager;
+    @Autowired
+    private EventsDao eventsDao;
 
    
-   
-  
-    public void save( Event entity ){
-        entityManager.persist( entity );
-     }
-
 
     @Override
-    public List<Event> listEvent() {
-return null;   }
+    public List<Events> findAll(Integer userId) {
 
-    @Override
-    public void createEvent(Event event) {
-          save(event);  
-    
+        return eventsDao.findAll();
     }
-    
+
+    @Override
+    public void save(Events event) {
+        eventsDao.save(event);
+
+    }
+
+//    @Override
+//    public List<Events> findAllByUser(User user) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public Events findById(Integer id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    @Override
+//    public List<Events> findAllAppliedEvents(Integer userId) {
+//        List<Integer> eventId = eventsDao.findAllEventIdByUserId(userId);
+//        List<Events> events = new ArrayList<>();
+//        if (eventId == null || eventId.isEmpty()) {
+//
+//            return events;
+//        }
+//
+//        for (Integer eId : eventId) {
+//
+//            events.add(eventsDao.findById(eId));
+//
+//        }
+//        return events;
+//    }
+//
+//    @Override
+//    public List<Events> findAllNotAppliedEvents(String key, Integer userId) {
+//
+//        List<Integer> ids = eventsDao.findAllNotAppliedEvents(userId);
+//        List<Events> events = new ArrayList<>();
+//        if (ids == null || ids.isEmpty()) {
+//            System.out.println("null return --> findall");
+//            return events;
+//        }
+//        return eventsDao.findByDescriptionByNotApplied(ids, key);
+//    }
+
+
+    @Override
+    public void update(Events event) {
+        eventsDao.save(event);
+    }
+
+   
+
+   
+
 }
