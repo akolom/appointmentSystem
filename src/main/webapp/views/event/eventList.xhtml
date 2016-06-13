@@ -69,13 +69,7 @@ and open the template in the editor.
                         <p:column headerText="#{msgs.eventDescription}" >
                             <h:outputText value="#{event.description}" />
                         </p:column>
-                        <ui:remove>  
-                        <p:column  filterBy="#{product.statusId.name}"  headerText="#{msgs.productStatus}" sortBy="#{product.statusId.name}" >
-                            <h:outputText value="#{product.statusId.name}" />
-                        </p:column>
-</ui:remove>
                         
-                        <ui:remove>  
                         <p:column  filterBy="#{event.userId.firstname} #{event.userId.lastname}"  headerText="#{msgs.eventOwner}" sortBy="# {event.userId.firstname} # {event.userId.lastname}">
 
                             <h:outputText value="#{event.userId.firstname} #{event.userId.lastname}" />

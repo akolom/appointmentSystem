@@ -41,25 +41,23 @@ and open the template in the editor.
                         <p:outputLabel for="dueDate" value="#{msgs.eventDueDate}: " />
                         <p:calendar id="dueDate" value="#{eventManagedBean.eventBean.endTime}" />
                         <p:message for="dueDate" />
-                        <ui:remove>
-                        <p:outputLabel for="status" value="#{msgs.eventStatus}" />
-                        <p:selectOneMenu id="status" value="#{productManagedBean.statusId}" >
-                            <f:selectItems value="#{productManagedBean.statusOption}" />
-                        </p:selectOneMenu>
-                        <p:message for="status" />
-</ui:remove>
-                        <p:outputLabel for="description" value="#{msgs.eventDescription}" />
-                        <p:inputTextarea id="description" value="#{eventManagedBean.eventBean.description}" rows="3"/>
-                        <p:message for="description" />
+<!--                        <ui:remove>
+                            <p:outputLabel for="status" value="#{msgs.eventStatus}" />
+                            <p:selectOneMenu id="status" value="#{productManagedBean.statusId}" >
+                                <f:selectItems value="#{productManagedBean.statusOption}" />
+                            </p:selectOneMenu>
+                            <p:message for="status" />-->
 
-                        <h:panelGroup />
-                        <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />
+                            <p:outputLabel for="description" value="#{msgs.eventDescription}" />
+                            <p:inputTextarea id="description" value="#{eventManagedBean.eventBean.description}" rows="3"/>
+                            <p:message for="description" />
+
+                            <h:panelGroup />
+                            <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />
 
                     </h:panelGrid>
-                    <ui:remove>  
-                    <h:inputHidden value="#{productManagedBean.updateProductId}" />
-                    <input type="hidden" name="userId" value="#{employeeManagedBean.currentEmployeeBean.id}" />
-</ui:remove>
+
+
                 </h:form>
             </ui:define>
         </ui:composition>
