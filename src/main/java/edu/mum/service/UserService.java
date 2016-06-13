@@ -5,7 +5,6 @@
  */
 package edu.mum.service;
 
-
 import edu.mum.domain.User;
 import java.util.List;
 
@@ -14,27 +13,20 @@ import java.util.List;
  * @author akolom
  */
 public interface UserService {
-    
-    
+
     public void save(User user);
 
-	public List<User> findAll();
+    public List<User> findAll();
 
-	public void update(User user);
+    public User update(User user);
 
 //	public User findOneByUsername(String userName);
 //
-        public User findUserById(Integer id);
-
-	
+    public User findUserById(Integer id);
 
 //	public void removeEventsFromUser(User u, Events events);
 //
 //	
 //
 //	public void saveUserInEvents(Events Events, User user);
-
-	
-
-    
 }

@@ -6,6 +6,7 @@
 package edu.mum.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -52,15 +53,12 @@ public class User implements Serializable{
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_credentials")
+    @JoinColumn(name = "credential_id")
     private Credentials credentials;
     
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Event> events;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Event> events=new ArrayList<>();
 
-    public User(int uId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public List<Event> getEvents() {
         return events;

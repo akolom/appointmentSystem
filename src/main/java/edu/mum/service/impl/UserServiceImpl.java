@@ -32,18 +32,14 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.getCredentials().setEnabled(true);
         user.getCredentials().setPassword(encoder.encode(user.getCredentials().getPassword()));
-        String authorityName = user.getCredentials().getAuthority().getName();
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setEmail(user.getEmail());
-        user.setCredentials(user.getCredentials());
+//        String authorityName = user.getCredentials().getAuthority().getName();
+        
         userDao.save(user);
 
     }
 
     @Override
     public List<User> findAll() {
-
         return userDao.findAll();
     }
 
@@ -51,15 +47,8 @@ public class UserServiceImpl implements UserService {
     
 
     @Override
-    public void update(User user) {
-
-        try {
-             userDao.save(user);
-        } catch (StaleObjectStateException e) {
-            System.out.println(e);
-           // return null;
-        }
-
+    public User update(User user) {
+       return userDao.update(user);
     }
 
    

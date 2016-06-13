@@ -11,7 +11,7 @@ import edu.mum.domain.Authority;
  *
  * @author HAGOS
  */
-public interface AuthorityDao {
+public interface AuthorityDao extends GenericDao<Authority>{
 
 
     public Authority findOneByName(String name);

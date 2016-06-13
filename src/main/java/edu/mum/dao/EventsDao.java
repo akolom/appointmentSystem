@@ -12,15 +12,9 @@ import java.util.List;
  *
  * @author HAGOS
  */
-public interface EventsDao {
+public interface EventsDao extends GenericDao<Event>{
 
-    
-
-public List<Event> findAll();
-    public void save(Event event);
-    public void update(Event event);
     public Event findById(Integer Id);
-  //  public List<Event> findAll();
 
   
 

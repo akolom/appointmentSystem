@@ -113,12 +113,12 @@ public class EventManagedBean implements Serializable {
 //            FacesMessage msg = new FacesMessage("Product Backlog Updated", String.valueOf(updateProductId));
 //            FacesContext.getCurrentInstance().addMessage(null, msg);
         //} else {
-        //eventService.save(event);
+        eventService.save(event);
         FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         // }
 
-        return "eventList.faces";
+        return "eventList.jsf";
     }
 
     public void editEvent(RowEditEvent event) throws IOException {

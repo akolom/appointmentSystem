@@ -29,6 +29,6 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     public User findUserById(Integer id) {
         User user = entityManager.find(User.class, id);
         return user;
-    }
+    }    
 
 }

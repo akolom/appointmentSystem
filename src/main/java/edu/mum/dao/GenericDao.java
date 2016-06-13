@@ -1,8 +1,6 @@
 package edu.mum.dao;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public interface GenericDao<T> {
 	/**
@@ -19,7 +17,7 @@ public interface GenericDao<T> {
 
     T findOne(Long id);
 
-    void update(T t);   
+    T update(T t);   
     
     public List<T> findAll();
 

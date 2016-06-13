@@ -26,15 +26,6 @@ public class EventsDaoImpl extends GenericDaoImpl<Event> implements EventsDao {
         return entityManager.find(Event.class, Id);
     }
 
-    @Override
-    public List<Event> findAll() {
-        List<Event> events
-                = entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
-        return events;
-    }
-      @Override
-    public void save(Event events) {
-        entityManager.persist(events);
-    }
+     
 
 }

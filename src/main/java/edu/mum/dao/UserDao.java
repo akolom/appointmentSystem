@@ -13,13 +13,10 @@ import java.util.Map;
  *
  * @author HAGOS
  */
-public interface UserDao<T> {
+public interface UserDao extends GenericDao<User> {
 
     User findOneByCredentialsUserName(User userName);
 
     public User findUserById(Integer id);
-
-    public List<User> findAll();
-
-    public void save(User user);
+    
 }
