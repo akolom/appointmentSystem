@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <f:view>
+
+        <f:event type="preRenderView" listener="#{crd.checkLogin(event)}"/> 
+
+
+        <h:body>
+            <h:form>
+
+                <div>
+                    <h:outputLabel for="name" >#{msgs.registrationFirstname}</h:outputLabel>
+                    <h:inputText id="fname" value="#{userMangedBean.user.firstName}" requiredMessage="First Name Reqired" required="true"/>
+
+                    <h:outputLabel for="price">#{msgs.registrationLastname}</h:outputLabel>
+                    <h:inputText id="lname" value="#{userMangedBean.user.lastName}" requiredMessage="Last Name Required" required="true"/>
+                    <h:outputLabel for="price">"Email:"</h:outputLabel>
+                    <h:inputText id="lname" value="#{userMangedBean.user.email}" requiredMessage="Email Required" required="true"/>
+
+                    <h:outputLabel for="price">"Contact:"</h:outputLabel>
+                    <h:inputText id="lname" value="#{userMangedBean.user.contact}" requiredMessage="Email Required" required="true"/>
+
+                    <h:commandButton value="Cancel" action="login.jsf" immediate="true" />
+                    <h:commandButton value="Add" action="#{userMangedBean.addUser()}" />
+            </h:form>
+
+        </h:body>
+
+    </f:view>
+</html>
+

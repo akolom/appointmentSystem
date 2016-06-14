@@ -56,13 +56,13 @@ public class InitServiceImpl {
 
         Credentials credentials = new Credentials();
         credentials.setUserName("user");
-        credentials.setPassword(encoder.encode("user"));
+        credentials.setPassword("user");
         credentials.setAuthority(authority);
         credentials.setEnabled(true);
 
         Credentials credentials1 = new Credentials();
         credentials1.setUserName("admin");
-        credentials1.setPassword(encoder.encode("admin"));
+        credentials1.setPassword("admin");
         credentials1.setAuthority(authority1);
         credentials1.setEnabled(true);
 
