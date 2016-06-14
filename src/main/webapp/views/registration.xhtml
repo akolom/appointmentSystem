@@ -17,18 +17,23 @@
 
                 <div>
                     <h:outputLabel for="name" >#{msgs.registrationFirstname}</h:outputLabel>
-                    <h:inputText id="fname" value="#{userMangedBean.user.firstName}" requiredMessage="First Name Reqired" required="true"/>
+                    <h:inputText id="fname" value="#{userMangedBean.userBean.firstName}" requiredMessage="First Name Reqired" required="true"/>
 
                     <h:outputLabel for="price">#{msgs.registrationLastname}</h:outputLabel>
-                    <h:inputText id="lname" value="#{userMangedBean.user.lastName}" requiredMessage="Last Name Required" required="true"/>
+                    <h:inputText id="lname" value="#{userMangedBean.userBean.lastName}" requiredMessage="Last Name Required" required="true"/>
                     <h:outputLabel for="price">"Email:"</h:outputLabel>
-                    <h:inputText id="lname" value="#{userMangedBean.user.email}" requiredMessage="Email Required" required="true"/>
+                    <h:inputText id="lname" value="#{userMangedBean.userBean.email}" requiredMessage="Email Required" required="true"/>
 
                     <h:outputLabel for="price">"Contact:"</h:outputLabel>
-                    <h:inputText id="lname" value="#{userMangedBean.user.contact}" requiredMessage="Email Required" required="true"/>
-
+                    <h:inputText id="lname" value="#{userMangedBean.userBean.contact}" requiredMessage="Email Required" required="true"/>
+                     <h:outputLabel for="price">"User Name"</h:outputLabel>
+                     
+                     <h:inputText id="lname" value="#{userMangedBean.userBean.userName}" requiredMessage="Email Required" required="true"/>
+                    
+                     <h:outputLabel for="price">"password"</h:outputLabel>
+                     <h:inputSecret id="lname" value="#{userMangedBean.userBean.pasword}" requiredMessage="Email Required" required="true"/>
                     <h:commandButton value="Cancel" action="login.jsf" immediate="true" />
-                    <h:commandButton value="Add" action="#{userMangedBean.addUser()}" />
+                     <h:commandButton value="Add" action="#{userMangedBean.addUser()}" />
             </h:form>
 
         </h:body>

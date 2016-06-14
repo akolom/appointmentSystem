@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +49,9 @@ public class LoginManagedBean implements Serializable {
         this.credentialBean = credentialBean;
     }
 
+    public String getFullName(){
+        return userLogin.getFirstName()+" "+userLogin.getLastName();
+    }
     @Autowired
     private UserService userService;
 
@@ -76,7 +78,7 @@ public class LoginManagedBean implements Serializable {
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
         session.invalidate();
 
-        return "";
+        return "login";
     }
 
     public User checkCredentials() {

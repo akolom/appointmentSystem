@@ -12,7 +12,7 @@ import javax.inject.Named;
  *
  * @author matt
  */
-@Named("UserBean")
+@Named("userBean")
 @RequestScoped
 public class UserBean {
         private String email;
@@ -24,6 +24,25 @@ public class UserBean {
     private String contact;
     
     private boolean status;
+    private String UserName;
+    private String Pasword;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
+
+    public String getPasword() {
+        return Pasword;
+    }
+
+    public void setPasword(String Pasword) {
+        this.Pasword = Pasword;
+    }
+    
 
     public String getEmail() {
         return email;

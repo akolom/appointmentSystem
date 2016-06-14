@@ -6,13 +6,9 @@
 package edu.mum.managedBean;
 
 import edu.mum.bean.UserBean;
-import edu.mum.dao.UserDao;
-import edu.mum.dao.impl.UserDaoImpl;
 import edu.mum.domain.User;
 import edu.mum.service.UserService;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -34,6 +30,14 @@ public class UserMangedBean implements Serializable {
     private UserBean userBean;
     @Autowired
     private UserService userService;
+
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+    }
 
     /**
      * Creates a new instance of UserMangedBean

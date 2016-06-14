@@ -18,15 +18,14 @@
                     <h:panelGroup>
                         
                         <div class="userInformation">
-                            <img src="../resources/images/user-alt-128.png" width="15" height="15" alt="user-alt-128"/>
-
-                            #{employeeManagedBean.currentEmployeeBean.roleId.name}
-                            : #{employeeManagedBean.currentEmployeeBean.firstname} #{employeeManagedBean.currentEmployeeBean.lastname}
+                            <!--<img src="../resources/images/user-alt-128.png" width="15" height="15" alt="user-alt-128"/>-->
+                            Welcome, #{loginManagedBean.fullName}
+                            
                         </div>
                         
                         <h:form>
                             <div class="userInformation">
-                            <p:commandLink value="#{msgs.logout}" action="#{employeeManagedBean.logout()}"/>
+                                <p:commandLink value="#{msgs.logout}" action="#{loginManagedBean.logout()}"/>
                             </div>
                         </h:form>
                         
