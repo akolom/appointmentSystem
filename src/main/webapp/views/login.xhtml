@@ -19,33 +19,34 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="text-center">AGILE Scrum Login</h1>
+                        <h1 class="text-center">#{msgs.windowTitle} Login</h1>
                     </div>
                     <div class="modal-body">
                         <h:form>
                             <!--<p:messages showDetail="true" autoUpdate="true" closable="true" />-->
                             <p:messages autoUpdate="true" closable="true" />
+                            <p:commandButton action="registration.jsf" value="Sign Up"/>
                         </h:form>
 
                         <h:form class="form  center-block">
                             <h:panelGrid id="grid" columns="2" cellspacing="10" >
 
                                 <p:outputLabel for="username" value="#{msgs.loginUsername}: " />                                
-                                <p:inputText id="username" value="#{employeeManagedBean.login.username}" />
+                                <p:inputText id="username" value="#{loginManagedBean.credentialBean.username}" />
                                 
                                 <p:outputLabel for="password" value="#{msgs.loginPassword}: " />
-                                <p:password id="password" value="#{employeeManagedBean.login.password}" />
+                                <p:password id="password" value="#{loginManagedBean.credentialBean.password}" />
 
                                 <h:panelGroup/>
-                                <p:commandButton value="Sign In" action="#{employeeManagedBean.authenticate()}" update="grid"/>
-
-                            </h:panelGrid>                           
+                                <p:commandButton action="#{loginManagedBean.login()}" value="Login"/>
+                            </h:panelGrid>   
+                            <p style="color: red">#{sessionScope.error}</p>
                         </h:form>
                     </div>
 
                     <div class="modal-footer">
                         <div class="col-md-12">
-                            <span>© 2015 Agile scrum - cs545 WAA</span>
+                            <span>#{msgs.footer}</span>
                         </div>
                     </div>
                 </div>
