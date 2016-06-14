@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"     
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="title">
+                #{msgs.windowTitle} - #{msgs.event}
+            </ui:define>
+
+            <ui:define name="formTitle">
+                #{msgs.eventListTitle}
+            </ui:define>
+            
+            
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{registerManagedBean.eventList}" var="event" 
+                                 editable="true" resizableColumns="true" style="margin-top:20px; margin-bottom: 20px" 
+                                 paginator="true" rows="13" paginatorPosition="bottom"
+                                 widgetVar="eventTable" emptyMessage="No event backlog found with given criteria">
+
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Search: " />
+                                <p:inputText id="globalFilter" onkeyup="PF('productTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                            </p:outputPanel>
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{registerManagedBean.editEvent(event)}" update=":form:msgs"/>
+                        <p:ajax event="rowEditCancel" listener="#{registerManagedBean.cancelEditEvent(event)}" update=":form:msgs"/>
+
+
+                        <p:column headerText="#{msgs.eventId}" sortBy="#{event.id}"  filterBy="#{event.id}"  >
+                            <h:outputText value="#{event.id}" />
+                        </p:column>
+
+                        <p:column headerText="#{msgs.eventName}" sortBy="#{event.name}"  filterBy="#{event.name}" filterMatchMode="contains"  >
+                            <h:outputText value="#{event.name}" />
+<!--                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="# {product.name}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="# {product.name}" style="width:100%" label="Year" required="true"/></f:facet>
+                            </p:cellEditor>-->
+                        </p:column>
+
+                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}" style="width:105px">
+                            <h:outputText value="#{event.formatStartDate()}" />
+<!--                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="# {product.formatStartDate()}" /></f:facet>
+                                <f:facet name="input"><p:calendar value="# {product.formatStartDate()}" /></f:facet>
+                            </p:cellEditor>-->
+                        </p:column>
+
+                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}" style="width:105px">
+                            <h:outputText value="#{event.formatDueDate()}" />
+                        </p:column>
+
+                        <p:column headerText="#{msgs.eventDescription}" >
+                            <h:outputText value="#{event.description}" />
+                        </p:column>
+                        
+<!--                        <p:column  filterBy="#{event.firstname} #{event.userId.lastname}"  headerText="#{msgs.eventOwner}" sortBy="# {event.userId.firstname} # {event.userId.lastname}">
+
+                            <h:outputText value="#{event.userId.firstname} #{event.userId.lastname}" />
+                        </p:column>-->
+
+                        <p:column style="width:25px">
+                            <p:rowEditor />
+                            <p:commandLink action="# {registerManagedBean.editProduct(# {event.id})}" value="Edit" />
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define> 
+            
+        </ui:composition>
+    </h:body>
+</html>
+
