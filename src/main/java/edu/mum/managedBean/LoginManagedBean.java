@@ -11,7 +11,9 @@ import edu.mum.service.UserService;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -49,8 +51,8 @@ public class LoginManagedBean implements Serializable {
         this.credentialBean = credentialBean;
     }
 
-    public String getFullName(){
-        return userLogin.getFirstName()+" "+userLogin.getLastName();
+    public String getFullName() {
+        return userLogin.getFirstName() + " " + userLogin.getLastName();
     }
     @Autowired
     private UserService userService;
@@ -62,23 +64,27 @@ public class LoginManagedBean implements Serializable {
     }
 
     public String login() {
-        userLogin=checkCredentials();
-        if (userLogin==null) {
+        userLogin = checkCredentials();
+        if (userLogin == null) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage("Login Failed!"));            
+            facesContext.addMessage(null, new FacesMessage("Login Failed!"));
             return "login";
-        }else {
+        } else {
             return "welcome?faces-redirect=true";
         }
     }
 
-    public String logout() {
+    public void logout() {
         FacesContext ctx = FacesContext.getCurrentInstance();
 
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
         session.invalidate();
 
-        return "login";
+        FacesContext context = FacesContext.getCurrentInstance();
+        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
+        handler.performNavigation("/views/login");
+//        return "login?faces-redirect=true";
+        //return "welcome?faces-redirect=true";
     }
 
     public User checkCredentials() {
@@ -86,7 +92,7 @@ public class LoginManagedBean implements Serializable {
 //
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         for (User user : users) {
-            boolean passwordMatch=encoder.matches(credentialBean.getPassword(), user.getCredentials().getPassword());
+            boolean passwordMatch = encoder.matches(credentialBean.getPassword(), user.getCredentials().getPassword());
             if (user.getCredentials().getUserName().equalsIgnoreCase(credentialBean.getUsername())
                     && passwordMatch) {
                 return user;

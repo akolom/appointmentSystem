@@ -116,4 +116,10 @@ public class EventServiceImpl implements EventService {
         Date afterAddingMins = new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
         return afterAddingMins;
     }
+
+    @Override
+    public List<Event> findEventsByUserId(int userId) {
+        
+        return eventsDao.findEventsByUserId(userId);
+    }
 }

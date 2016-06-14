@@ -10,20 +10,7 @@
     <h:body>
         
         <ui:composition template="/templates/masterLayout.xhtml">  
-                    <ui:define name="sidebarLeft">
-                <h:form>  
-    
-                 <h3 style="margin-top:0">Plain Menu</h3>
                  
-                 
-                  <h:commandButton action="#{eventManagedBean.invokeEvent()}" value="CreateEvent"/>
-                <br/>
-                <h:commandButton action="#{eventManagedBean.invokeListOfEvents()}" value="ListEvent"/>
-                 
- 
-                </h:form>
-            </ui:define>
-            
             </ui:composition>
     </h:body>
 </html>

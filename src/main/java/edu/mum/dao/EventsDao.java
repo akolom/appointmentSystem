@@ -15,6 +15,8 @@ import java.util.List;
 public interface EventsDao extends GenericDao<Event>{
 
     public Event findById(Integer Id);
+    
+    public List<Event> findEventsByUserId(int userId);
 
   
 
