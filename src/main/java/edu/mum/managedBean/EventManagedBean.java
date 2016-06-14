@@ -13,6 +13,7 @@ import edu.mum.service.UserService;
 import edu.mum.service.impl.EventServiceImpl;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
@@ -63,6 +64,7 @@ public class EventManagedBean implements Serializable {
         users = userService.findAll();
     }
     public void refreshUser(){
+        eventBean=new EventBean();
         users = userService.findAll();
     }
     public EventBean getEventBean() {
@@ -98,24 +100,27 @@ public class EventManagedBean implements Serializable {
     }
 
     public String createEvent() {
-
-        int uId = Integer.valueOf(FacesContext.getCurrentInstance().
-                getExternalContext().getRequestParameterMap().get("userId"));
-
-        Mapper mapper = new DozerBeanMapper();
+        List<User> users=new ArrayList<>();
+        for (String id : eventBean.getUsers()) {
+            User user=userService.findUserById(Integer.parseInt(id));
+            users.add(user);
+        }
+        Event event=new Event();
+        event.setName(eventBean.getName());
+        event.setDescription(eventBean.getDescription());
+        event.setStartTime(eventBean.getStartTime());
+        event.setEndTime(eventBean.getEndTime());
+        for (User user : users) {
+            event.addUser(user);
+        }
+//        Mapper mapper = new DozerBeanMapper();
         //eventBean.setStatusId(new Status(statusId));
         // eventBean.setUser(new User(uId));
-        Event event = mapper.map(eventBean, Event.class);
-        // product.setId(updateProductId);
-
-//        if (updateProductId > 0) {
-//            productService.updateProduct(product);
-//            FacesMessage msg = new FacesMessage("Product Backlog Updated", String.valueOf(updateProductId));
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-        //} else {
+//        Event event = mapper.map(eventBean, Event.class);
+        
         eventService.save(event);
-        FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+//        FacesMessage msg = new FacesMessage("New Event Backlog Added", event.getId().toString());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
         // }
 
         return "eventList.jsf";
@@ -139,5 +144,5 @@ public class EventManagedBean implements Serializable {
 //        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Product) event.getObject()).getId().toString());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
+    
 }

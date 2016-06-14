@@ -10,12 +10,16 @@
     </h:head>
     <h:body>
         <ui:composition>   
-            <h:form>
-                <p:growl id="messages" showDetail="false"/>
-                <p:menu model="#{menuView.model}" toggleable="true" >
-
-                </p:menu>                
-            </h:form>
+            <!--            <h:form>
+                            <p:growl id="messages" showDetail="false"/>
+                            <p:menu model="#{menuView.model}" toggleable="true" >
+            
+                            </p:menu>                
+                        </h:form>-->
+            <h3 style="margin-top:0">Menu</h3>
+            <h:button outcome="eventForm" value="Create Event"/>
+            <br/>
+            <h:button outcome="eventList" value="My Event List"/>
         </ui:composition>
     </h:body>
 </html>

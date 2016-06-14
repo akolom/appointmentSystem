@@ -15,12 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -33,10 +29,8 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Email(message = "Must  be a valid email address")
     private String email;
 
-    @NotEmpty(message = "{NotEmpty}")
     private String firstName;
 
     private String lastName;
@@ -56,7 +50,7 @@ public class User implements Serializable{
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
     
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Event> events=new ArrayList<>();
 
 

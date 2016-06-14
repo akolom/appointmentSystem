@@ -16,13 +16,12 @@ and open the template in the editor.
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="title">
-                #{msgs.windowTitle} - #{msgs.product}
+                #{msgs.windowTitle} - #{msgs.event}
             </ui:define>
 
             <ui:define name="formTitle">
                 #{msgs.eventFormTitle}
             </ui:define>
-
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{eventManagedBean.refreshUser()}"/>
                 <h:form>
@@ -50,9 +49,10 @@ and open the template in the editor.
                         <h:outputLabel for="menu" value="#{msgs.eventUsers}:" />
                         <p:selectCheckboxMenu id="menu" value="#{eventManagedBean.eventBean.users}" label="Users"
                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                            <f:selectItems value="#{eventManagedBean.users}" var="user"
-                                           itemLabel="#{user.firstName} #{user.lastName}" itemValue="#{user.id}" />
+                            <f:selectItems value="#{eventManagedBean.users}" var="user" 
+                                           itemLabel="#{user.firstName} #{user.lastName}" itemValue="#{user.id}"/>
                         </p:selectCheckboxMenu>
+                        <p:message for="menu" />
                         <!--<p:commandLink value="Submit" update="display" />-->
                         <p:commandButton value="Submit" action="#{eventManagedBean.createEvent()}" update="grid" />
 

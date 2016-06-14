@@ -41,7 +41,7 @@ public class EventBean {
     private Date endTime;
 
     private String description;
-    private List<User> users=new ArrayList<>();
+    private List<String> users=new ArrayList<>();
     
     public String getName() {
         return name;
@@ -75,11 +75,11 @@ public class EventBean {
         this.description = description;
     }
 
-    public List<User> getUsers() {
+    public List<String> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<String> users) {
         this.users = users;
     }
 
