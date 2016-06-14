@@ -39,9 +39,22 @@ public class EventBean {
     @NotNull(message = "{eventbean_enddate_notnull}")
     @Future(message = "{eventbean_endtdate_future}")
     private Date endTime;
+    
+    private int duration;
 
     private String description;
     private List<String> users=new ArrayList<>();
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+    
+    
+    
     
     public String getName() {
         return name;

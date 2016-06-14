@@ -8,12 +8,14 @@ package edu.mum.service.impl;
 import edu.mum.dao.EventsDao;
 import edu.mum.domain.Event;
 import edu.mum.domain.EventRegister;
+import edu.mum.managedBean.DurationManagedBean;
 import edu.mum.service.EventService;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventsDao eventsDao;
 
+    @Inject
+    private DurationManagedBean durationManagedBean;
     @Override
     public List<Event> findAll() {
 
@@ -40,12 +44,13 @@ public class EventServiceImpl implements EventService {
         List<EventRegister> eventRegisters=new ArrayList<>();
         long duration = event.getEndTime().getTime() - event.getStartTime().getTime();
         long diffInMins = TimeUnit.MILLISECONDS.toMinutes(duration);
-        int slot = (int) (diffInMins / 30);
+        int defaultDuration=durationManagedBean.getDuration();
+        int slot = (int) (diffInMins / defaultDuration);
         Date date = event.getStartTime();
         for (int i = 0; i < slot; i++) {
             EventRegister eventRegister=new EventRegister();
             eventRegister.setStartTime(date);
-            date=addMinutesToDate(30, date);
+            date=addMinutesToDate(defaultDuration, date);
             eventRegister.setEndTime(date);
             eventRegister.setEvent(event);
             eventRegisters.add(eventRegister);

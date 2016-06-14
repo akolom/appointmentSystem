@@ -145,4 +145,6 @@ public class EventManagedBean implements Serializable {
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    
+    
 }
