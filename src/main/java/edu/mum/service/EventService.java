@@ -19,5 +19,5 @@ public interface EventService {
     public List<Event> findAll();
     public void update(Event event);
     public void save(Event event);
-
+  public List<Event> findEventsByUserId(int userId);
 }

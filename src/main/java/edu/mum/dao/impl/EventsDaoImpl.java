@@ -9,6 +9,7 @@ import edu.mum.dao.EventsDao;
 import edu.mum.domain.Event;
 
 import java.util.List;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,6 +27,13 @@ public class EventsDaoImpl extends GenericDaoImpl<Event> implements EventsDao {
         return entityManager.find(Event.class, Id);
     }
 
-     
+    @Override
+    public List<Event> findEventsByUserId(int userId) {
+        
+        Query query = this.entityManager.createQuery("SELECT e from Event e inner join e.users u where u.id =:id");
+        
+        query.setParameter("id", userId);
+        return query.getResultList();
+    }     
 
 }

@@ -28,7 +28,7 @@ and open the template in the editor.
             <ui:define name="content">
                 <h:form id="form">
                     <p:growl id="msgs" showDetail="true"/>
-                    <p:dataTable value="#{registerManagedBean.eventList}" var="event" 
+                    <p:dataTable value="#{registerManagedBean.regisgerEvent()}" var="event" 
                                  editable="true" resizableColumns="true" style="margin-top:20px; margin-bottom: 20px" 
                                  paginator="true" rows="13" paginatorPosition="bottom"
                                  widgetVar="eventTable" emptyMessage="No event backlog found with given criteria">
@@ -40,9 +40,7 @@ and open the template in the editor.
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:ajax event="rowEdit" listener="#{registerManagedBean.editEvent(event)}" update=":form:msgs"/>
-                        <p:ajax event="rowEditCancel" listener="#{registerManagedBean.cancelEditEvent(event)}" update=":form:msgs"/>
-
+                 
 
                         <p:column headerText="#{msgs.eventId}" sortBy="#{event.id}"  filterBy="#{event.id}"  >
                             <h:outputText value="#{event.id}" />
@@ -72,10 +70,7 @@ and open the template in the editor.
                             <h:outputText value="#{event.description}" />
                         </p:column>
                         
-<!--                        <p:column  filterBy="#{event.firstname} #{event.userId.lastname}"  headerText="#{msgs.eventOwner}" sortBy="# {event.userId.firstname} # {event.userId.lastname}">
 
-                            <h:outputText value="#{event.userId.firstname} #{event.userId.lastname}" />
-                        </p:column>-->
 
                         <p:column style="width:25px">
                             <p:rowEditor />
