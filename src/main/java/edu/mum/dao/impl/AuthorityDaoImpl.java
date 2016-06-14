@@ -25,7 +25,7 @@ public class AuthorityDaoImpl extends GenericDaoImpl<Authority> implements Autho
     @Override
     public Authority findOneByName(String name) {
         Query query = entityManager.createQuery("from Authority e where e.name = :name");
-        query.setParameter("username", name);
+        query.setParameter("name", name);
         List<Authority> authority = query.getResultList();
         if (authority.isEmpty()) {
             return null;

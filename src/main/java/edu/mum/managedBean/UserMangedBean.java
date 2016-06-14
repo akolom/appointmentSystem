@@ -6,7 +6,10 @@
 package edu.mum.managedBean;
 
 import edu.mum.bean.UserBean;
+import edu.mum.domain.Authority;
+import edu.mum.domain.Credentials;
 import edu.mum.domain.User;
+import edu.mum.service.AuthorityService;
 import edu.mum.service.UserService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -24,12 +27,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMangedBean implements Serializable {
 
-    User user = new User();
-
     @Inject
     private UserBean userBean;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthorityService authorityService;
+    
 
     public UserBean getUserBean() {
         return userBean;
@@ -46,9 +50,25 @@ public class UserMangedBean implements Serializable {
     }
 
     public String addUser() {
+        Authority authority=authorityService.findOneByName("User");
+        Credentials credentials=new Credentials();
+        credentials.setUserName(userBean.getUserName());
+        credentials.setPassword(userBean.getPasword());
+        credentials.setAuthority(authority);
+        
+        User user=new User();
+        user.setFirstName(userBean.getFirstName());
+        user.setLastName(userBean.getLastName());
+        user.setContact(userBean.getContact());
+        user.setEmail(userBean.getEmail());
+        user.setCredentials(credentials);
+        
+        
+        
+        
         //user=new User(1,user.getFirstName(),user.getLastName(),user.getEmail());
         userService.save(user);
         //users.add(user);
-        return "welcome.jsf";
+        return "welcome";
     }
 }

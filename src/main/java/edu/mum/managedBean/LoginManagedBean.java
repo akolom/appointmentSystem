@@ -94,4 +94,8 @@ public class LoginManagedBean implements Serializable {
         }
         return null;
     }
+    public String signup()
+    {
+        return "userRegistration?faces-redirect=true";
+    }
 }

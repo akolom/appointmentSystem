@@ -6,7 +6,6 @@
 package edu.mum.service;
 
 import edu.mum.domain.Authority;
-import java.util.List;
 
 /**
  *

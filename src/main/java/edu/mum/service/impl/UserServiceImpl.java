@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         user.getCredentials().setPassword(encoder.encode(user.getCredentials().getPassword()));
 //        String authorityName = user.getCredentials().getAuthority().getName();
         
-        userDao.save(user);
+        userDao.update(user);
 
     }
 

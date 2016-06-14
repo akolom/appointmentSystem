@@ -25,7 +25,8 @@
                         <h:form>
                             <!--<p:messages showDetail="true" autoUpdate="true" closable="true" />-->
                             <p:messages autoUpdate="true" closable="true" />
-                            <p:commandButton action="registration.jsf" value="Sign Up"/>
+                            
+                            <br></br>
                         </h:form>
 
                         <h:form class="form  center-block">
@@ -39,8 +40,12 @@
 
                                 <h:panelGroup/>
                                 <p:commandButton action="#{loginManagedBean.login()}" value="Login"/>
+                                
                             </h:panelGrid>   
                             <p style="color: red">#{sessionScope.error}</p>
+                        </h:form>
+                        <h:form class="form  center-block">
+                            <p:commandButton action="#{loginManagedBean.signup()}" value="Sign Up"/>
                         </h:form>
                     </div>
 
