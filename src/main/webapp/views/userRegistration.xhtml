@@ -6,72 +6,75 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <title>Sign Up</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!--        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>-->
-        <title>Facelets Template</title>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </h:head>
 
     <h:body>
+        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">#{msgs.windowTitle} Registration</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h:form>
+                            <!--<p:messages showDetail="true" autoUpdate="true" closable="true" />-->
+                            <!--<p:messages autoUpdate="true" closable="true" />-->
 
-        <div id="top">
-            
-            <ui:insert name="top"><div align="center"  ><h><b>Registration</b></h></div></ui:insert>
-        </div>
+                            <br></br>
+                        </h:form>
 
-        <div id="content" class="center_content">
-            <ui:insert name="content">
-             <h:form>
+                        <h:form class="form  center-block">
+                            <p:growl id="msgs" showDetail="true"/>
+                            <h:panelGrid id="grid" columns="3" cellpadding="5" cellspacing="5" style="margin: 0 auto;">
 
-                <div>
-                    <p:growl id="msgs" showDetail="true"/>
-                    <h:panelGrid id="grid" columns="3" cellpadding="5" cellspacing="5">
-                        
-                        <p:outputLabel  for="fname" >#{msgs.registrationFirstname}</p:outputLabel>
-                        <p:inputText id="fname" value="#{userMangedBean.userBean.firstName}" />
-                        <p:message  for="fname" />
-                        
-                        <p:outputLabel for="lname">#{msgs.registrationLastname}</p:outputLabel>
-                        <p:inputText id="lname" value="#{userMangedBean.userBean.lastName}" />
-                        <p:message for="lname"/>
-                        
-                        <p:outputLabel for="email">Email:</p:outputLabel>
-                        <p:inputText id="email" value="#{userMangedBean.userBean.email}"/>
-                        <p:message for="email"/>
-                        
-                        <p:outputLabel for="contact">Contact:</p:outputLabel>
-                        <p:inputText id="contact" value="#{userMangedBean.userBean.contact}"/>
-                        <p:message for="contact"/>
-                        
-                        <p:outputLabel for="username">User Name</p:outputLabel>
-                        <p:inputText id="username" value="#{userMangedBean.userBean.username}"/>
-                        <p:message for="username"/>
-                        
-                        <p:outputLabel for="password">Password</p:outputLabel>
-                        <p:password id="password" value="#{userMangedBean.userBean.pasword}" />
-                        <p:message for="password"/>
-                        
-                        <p:commandButton value="Cancel" action="login.jsf" immediate="true" />
-                        <p:commandButton value="Add" action="#{userMangedBean.addUser()}" update="grid"  />
-                    </h:panelGrid>
-                </div>
-            </h:form>
-            
-            
-            </ui:insert>
-        </div>
+                                <p:outputLabel  for="fname" >#{msgs.registrationFirstname}</p:outputLabel>
+                                <p:inputText id="fname" value="#{userMangedBean.userBean.firstName}" />
+                                <p:message  for="fname" />
 
-        <div id="bottom">
-            <ui:insert name="bottom">
-                 <div class="modal-footer">
+                                <p:outputLabel for="lname">#{msgs.registrationLastname}</p:outputLabel>
+                                <p:inputText id="lname" value="#{userMangedBean.userBean.lastName}" />
+                                <p:message for="lname"/>
+
+                                <p:outputLabel for="email">Email:</p:outputLabel>
+                                <p:inputText id="email" value="#{userMangedBean.userBean.email}"/>
+                                <p:message for="email"/>
+
+                                <p:outputLabel for="contact">Contact:</p:outputLabel>
+                                <p:inputText id="contact" value="#{userMangedBean.userBean.contact}"/>
+                                <p:message for="contact"/>
+
+                                <p:outputLabel for="username">User Name</p:outputLabel>
+                                <p:inputText id="username" value="#{userMangedBean.userBean.username}"/>
+                                <p:message for="username"/>
+
+                                <p:outputLabel for="password">Password</p:outputLabel>
+                                <p:password id="password" value="#{userMangedBean.userBean.pasword}" />
+                                <p:message for="password"/>
+
+                                <p:button value="Cancel" outcome="login" />
+                                <p:commandButton value="Add" action="#{userMangedBean.addUser()}" update="grid"  />
+                            </h:panelGrid>
+                        </h:form>
+
+                    </div>
+
+                    <div class="modal-footer">
                         <div class="col-md-12">
                             <span>#{msgs.footer}</span>
                         </div>
                     </div>
-                
-            </ui:insert>
+                </div>
+            </div>
         </div>
-
     </h:body>
 
 </html>

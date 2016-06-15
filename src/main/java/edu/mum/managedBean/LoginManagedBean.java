@@ -8,8 +8,11 @@ package edu.mum.managedBean;
 import edu.mum.bean.CredentialBean;
 import edu.mum.domain.User;
 import edu.mum.service.UserService;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
@@ -17,6 +20,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -77,17 +81,20 @@ public class LoginManagedBean implements Serializable {
     }
 
     public void logout() {
-        userLogin=null;
+        userLogin = null;
         FacesContext ctx = FacesContext.getCurrentInstance();
 
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
         session.invalidate();
+        //        FacesContext context = FacesContext.getCurrentInstance();
+//        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
+//        handler.performNavigation("/views/login");
+        try {
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
-        handler.performNavigation("/views/login");
-//        return "login?faces-redirect=true";
-        //return "welcome?faces-redirect=true";
+            getFacesContext().getExternalContext().redirect(getRequest().getContextPath() + "/views/login.jsf");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public User checkCredentials() {
@@ -103,8 +110,16 @@ public class LoginManagedBean implements Serializable {
         }
         return null;
     }
-    public String signup()
-    {
+
+    public String signup() {
         return "userRegistration?faces-redirect=true";
+    }
+
+    protected HttpServletRequest getRequest() {
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
+    }
+
+    protected FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
     }
 }

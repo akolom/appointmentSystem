@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Enumeration;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author matt
  */
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/views/*"})
 public class LoginFilter implements Filter {
 
     @Inject
@@ -117,33 +118,33 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         Throwable problem = null;
-        User loginUser=null;
-        
-
+        User loginUser = null;
+        // managed bean name is exactly the session attribute name
+        LoginManagedBean login= (LoginManagedBean)req.getSession().getAttribute("loginManagedBean");
         try {
-            loginUser= loginMB.getUserLogin(); 
+            loginUser = login.getUserLogin();
         } catch (NullPointerException e) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
 
         }
-
+        
         try {
-//            String url=req.getServletPath();
-//            if (!url.contains("login")) {
-//                if (loginUser == null) {
-//                    HttpServletResponse httpResponse = (HttpServletResponse) response;
-//                    httpResponse.sendRedirect(req.getContextPath() + "/views/login.jsf");
-//                    return;
-//                }
-//            }else if(url.contains("login")){
-//                if (loginUser != null) {
-//                    HttpServletResponse httpResponse = (HttpServletResponse) response;
-//                    httpResponse.sendRedirect(req.getContextPath() + "/views/event/welcome.jsf");
-//                    return;
-//                }
-//            }
+            String url = req.getServletPath();
+            if (!url.contains("login") && !(url.contains("userRegistration"))) {
+                if (loginUser == null) {
+                    HttpServletResponse httpResponse = (HttpServletResponse) response;
+                    httpResponse.sendRedirect(req.getContextPath() + "/views/login.jsf");
+                    return;
+                }
+            } else if (url.contains("login")) {
+                if (loginUser != null) {
+                    HttpServletResponse httpResponse = (HttpServletResponse) response;
+                    httpResponse.sendRedirect(req.getContextPath() + "/views/event/welcome.jsf");
+                    return;
+                }
+            }
             chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
@@ -152,9 +153,8 @@ public class LoginFilter implements Filter {
             problem = t;
             t.printStackTrace();
         }
-        
-        doAfterProcessing(request, response);
 
+        doAfterProcessing(request, response);
 
         // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.
