@@ -31,6 +31,9 @@ public class UserMangedBean implements Serializable {
 
     @Inject
     private UserBean userBean;
+    
+    @Inject
+    private LoginManagedBean loginManagedBean;
     @Autowired
     private UserService userService;
     @Autowired
@@ -67,6 +70,8 @@ public class UserMangedBean implements Serializable {
 
         userService.save(user);
         
-        return "welcome";
+        loginManagedBean.setUserLogin(user);
+        
+        return "event/welcome?faces-redirect=true";
     }
 }

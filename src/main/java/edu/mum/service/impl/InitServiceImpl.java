@@ -12,6 +12,7 @@ package edu.mum.service.impl;
 import edu.mum.domain.Authority;
 import edu.mum.domain.Credentials;
 import edu.mum.domain.User;
+import edu.mum.service.AuthorityService;
 import edu.mum.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +34,9 @@ public class InitServiceImpl {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
+    AuthorityService authorityService;
 
     /**
      * This method executes after finishing dependency injections and invoked
@@ -47,10 +51,12 @@ public class InitServiceImpl {
         Authority authority = new Authority();
         authority.setName("User");
         authority.setRole("ROLE_USER");
+        authorityService.save(authority);
 
         Authority authority1 = new Authority();
         authority1.setName("Admin");
-        authority1.setRole("ROLE_ADMIN");
+        authority.setRole("ROLE_ADMIN");
+        authorityService.save(authority1);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 

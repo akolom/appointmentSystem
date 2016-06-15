@@ -19,6 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Named("userBean")
 @RequestScoped
 public class UserBean {
+
     @NotEmpty(message = "{userbean_email_notempty}")
     @Email(message = "{userbean_email_notempty}")
     private String email;
@@ -30,13 +31,13 @@ public class UserBean {
     private String lastName;
 
     private String contact;
-    
+
     private boolean status;
     @NotEmpty(message = "{userbean_username_error}")
-     @Size(min=2, max=30,message = "{userbean_username_error}")
+    @Size(min = 2, max = 30, message = "{userbean_username_error}")
     private String username;
-        @NotEmpty(message = "{userbean_password_error}")
-      @Size(min=4, max=30,message = "{userbean_password_error}")
+    @NotEmpty(message = "{userbean_password_error}")
+    @Size(min = 4, max = 30, message = "{userbean_password_error}")
     private String pasword;
 
     public String getUsername() {
@@ -54,7 +55,6 @@ public class UserBean {
     public void setPasword(String pasword) {
         this.pasword = pasword;
     }
-
 
     public String getEmail() {
         return email;
@@ -95,5 +95,5 @@ public class UserBean {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
 }

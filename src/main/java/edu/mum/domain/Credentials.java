@@ -35,7 +35,7 @@ public class Credentials implements Serializable{
     @OneToOne(mappedBy = "credentials", fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authority_id")
     private Authority authority;
 

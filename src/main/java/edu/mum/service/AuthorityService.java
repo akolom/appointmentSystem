@@ -16,5 +16,5 @@ public interface AuthorityService {
     //public List<Authority> findAll();
 
     public Authority findOneByName(String name);
-    
+    public void save(Authority auth);
 }
