@@ -16,19 +16,24 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author matt
  */
-@Named(value = "userMangedBean")
-@SessionScoped
+//@Named(value = "userMangedBean")
+//@SessionScoped
 @Component
+@Scope("session")
 public class UserMangedBean implements Serializable {
 
     @Inject
     private UserBean userBean;
+    
+    @Inject
+    private LoginManagedBean loginManagedBean;
     @Autowired
     private UserService userService;
     @Autowired
@@ -52,7 +57,7 @@ public class UserMangedBean implements Serializable {
     public String addUser() {
         Authority authority=authorityService.findOneByName("User");
         Credentials credentials=new Credentials();
-        credentials.setUserName(userBean.getUserName());
+        credentials.setUsername(userBean.getUsername());
         credentials.setPassword(userBean.getPasword());
         credentials.setAuthority(authority);
         
@@ -62,13 +67,11 @@ public class UserMangedBean implements Serializable {
         user.setContact(userBean.getContact());
         user.setEmail(userBean.getEmail());
         user.setCredentials(credentials);
-        
-        
-        
-        
-        //user=new User(1,user.getFirstName(),user.getLastName(),user.getEmail());
+
         userService.save(user);
-        //users.add(user);
-        return "welcome";
+        
+        loginManagedBean.setUserLogin(user);
+        
+        return "event/welcome?faces-redirect=true";
     }
 }

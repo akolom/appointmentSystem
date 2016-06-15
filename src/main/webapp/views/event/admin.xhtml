@@ -13,8 +13,7 @@
             
             <ui:define name="content"> 
             <h:form>
-                <p:growl id="msgs" showDetail="true"/>
-
+                <p:growl id="growl"  />
                 <h:panelGrid id="grid" columns="3" cellpadding="5" cellspacing="5">
                     <p:outputLabel for="duration" value="Duration : " />
                     <p:inputText id="duration" value="#{durationManagedBean.UIDuration}" validatorMessage="Between 15 minutes and 120 minutes" >
@@ -23,7 +22,7 @@
                     </p:inputText>
                     <p:message for="duration" />
 
-                     <p:commandButton action="#{durationManagedBean.changeDuration()}" value="Change" update="grid"/>
+                     <p:commandButton action="#{durationManagedBean.changeDuration()}" value="Change" update="growl"/>
 
                 </h:panelGrid>
 

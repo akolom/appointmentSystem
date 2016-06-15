@@ -27,4 +27,9 @@ public class AuthorityServiceImpl implements AuthorityService{
         return authorityDao.findOneByName(name);
     }
 
+    @Override
+    public void save(Authority auth) {
+        authorityDao.save(auth);
+    }
+
 }

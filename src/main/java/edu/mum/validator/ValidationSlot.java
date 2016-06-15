@@ -42,7 +42,14 @@ public class ValidationSlot {
         if (startDate != null && endDate != null) {
             Long duration = endDate.getTime() - startDate.getTime();
             long diffInMins = TimeUnit.MILLISECONDS.toMinutes(duration);
-
+            //start date and end date must be in 24 hour
+            if(diffInMins>1440){
+                FacesMessage msg
+                        = new FacesMessage("Start date and End date must be in 24 hour!");
+                msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                fc.addMessage(endDateID, msg);
+                fc.renderResponse();
+            }
            // String defaultDuration = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("defaultSlot");
             int defaultDurationInt = durationManagedBean.getDuration();
             //long defaultDurationMin = durationManagedBean.getDuration();

@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -28,11 +31,11 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+   
     private String email;
-
+    
     private String firstName;
-
+    
     private String lastName;
 
     private String contact;

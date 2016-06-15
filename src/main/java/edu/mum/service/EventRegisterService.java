@@ -5,10 +5,18 @@
  */
 package edu.mum.service;
 
+import edu.mum.domain.EventRegister;
+import java.util.List;
+
 /**
  *
  * @author HAGOS
  */
 public interface EventRegisterService {
+    public EventRegister findOne(int id);
     
+    public List<EventRegister> getEventRegisterByUserId(int id);
+    public List<EventRegister> getNotSelectedEventRegisterByEventId(int eventId);
+    
+    public void update(EventRegister event);
 }

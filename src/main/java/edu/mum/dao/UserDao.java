@@ -19,4 +19,6 @@ public interface UserDao extends GenericDao<User> {
 
     public User findUserById(Integer id);
     
+    public List<User> findAllExceptThisUserId(Integer id);
+    
 }

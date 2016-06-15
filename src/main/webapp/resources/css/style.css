@@ -59,3 +59,6 @@ and open the template in the editor.
      vertical-align: top;
 }
 
+.ui-panelgrid td {
+    padding: 10px 20px ;
+}

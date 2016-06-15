@@ -8,8 +8,11 @@ package edu.mum.managedBean;
 import edu.mum.bean.CredentialBean;
 import edu.mum.domain.User;
 import edu.mum.service.UserService;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
@@ -17,8 +20,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +31,10 @@ import org.springframework.stereotype.Component;
  *
  * @author matt
  */
-@Named(value = "loginManagedBean")
-@SessionScoped
+//@Named(value = "loginManagedBean")
+//@SessionScoped
 @Component
+@Scope("session")
 public class LoginManagedBean implements Serializable {
 
     private User userLogin;
@@ -54,6 +60,12 @@ public class LoginManagedBean implements Serializable {
     public String getFullName() {
         return userLogin.getFirstName() + " " + userLogin.getLastName();
     }
+    public boolean isAdmin(){
+        if(userLogin==null) return false;
+        else{
+            return userLogin.getCredentials().getAuthority().getName().equals("Admin");
+        }
+    }
     @Autowired
     private UserService userService;
 
@@ -70,21 +82,25 @@ public class LoginManagedBean implements Serializable {
             facesContext.addMessage(null, new FacesMessage("Login Failed!"));
             return "login";
         } else {
-            return "welcome?faces-redirect=true";
+            return "event/welcome?faces-redirect=true";
         }
     }
 
     public void logout() {
+        userLogin = null;
         FacesContext ctx = FacesContext.getCurrentInstance();
 
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
         session.invalidate();
+        //        FacesContext context = FacesContext.getCurrentInstance();
+//        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
+//        handler.performNavigation("/views/login");
+        try {
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
-        handler.performNavigation("/views/login");
-//        return "login?faces-redirect=true";
-        //return "welcome?faces-redirect=true";
+            getFacesContext().getExternalContext().redirect(getRequest().getContextPath() + "/views/login.jsf");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public User checkCredentials() {
@@ -93,15 +109,23 @@ public class LoginManagedBean implements Serializable {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         for (User user : users) {
             boolean passwordMatch = encoder.matches(credentialBean.getPassword(), user.getCredentials().getPassword());
-            if (user.getCredentials().getUserName().equalsIgnoreCase(credentialBean.getUsername())
+            if (user.getCredentials().getUsername().equalsIgnoreCase(credentialBean.getUsername())
                     && passwordMatch) {
                 return user;
             }
         }
         return null;
     }
-    public String signup()
-    {
+
+    public String signup() {
         return "userRegistration?faces-redirect=true";
+    }
+
+    protected HttpServletRequest getRequest() {
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
+    }
+
+    protected FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
     }
 }

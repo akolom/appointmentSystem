@@ -49,6 +49,8 @@ public class DurationManagedBean {
 
     public String changeDuration() {
         this.duration = UIDuration;
+        FacesMessage msg = new FacesMessage("Duration has been update!");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         return "admin.jsf";
     }
 }

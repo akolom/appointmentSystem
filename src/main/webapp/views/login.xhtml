@@ -13,6 +13,7 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!--<h:outputStylesheet library="css" name="style.css"  />-->
     </h:head>
     <h:body>
         <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" >
@@ -25,27 +26,24 @@
                         <h:form>
                             <!--<p:messages showDetail="true" autoUpdate="true" closable="true" />-->
                             <p:messages autoUpdate="true" closable="true" />
-                            
+
                             <br></br>
                         </h:form>
 
                         <h:form class="form  center-block">
-                            <h:panelGrid id="grid" columns="2" cellspacing="10" >
+                            <h:panelGrid id="grid" columns="2" cellspacing="5" cellpadding="5" >
 
                                 <p:outputLabel for="username" value="#{msgs.loginUsername}: " />                                
                                 <p:inputText id="username" value="#{loginManagedBean.credentialBean.username}" />
-                                
+
                                 <p:outputLabel for="password" value="#{msgs.loginPassword}: " />
                                 <p:password id="password" value="#{loginManagedBean.credentialBean.password}" />
-
-                                <h:panelGroup/>
-                                <p:commandButton action="#{loginManagedBean.login()}" value="Login"/>
                                 
+                                <p:commandButton action="#{loginManagedBean.login()}" value="Login" update="grid"/>
+                                <p:commandButton action="#{loginManagedBean.signup()}" value="Sign Up" immediate="true"/>
+
                             </h:panelGrid>   
                             <p style="color: red">#{sessionScope.error}</p>
-                        </h:form>
-                        <h:form class="form  center-block">
-                            <p:commandButton action="#{loginManagedBean.signup()}" value="Sign Up"/>
                         </h:form>
                     </div>
 
