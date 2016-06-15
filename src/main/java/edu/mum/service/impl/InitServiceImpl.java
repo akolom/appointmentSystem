@@ -85,7 +85,7 @@ public class InitServiceImpl {
         userService.save(user1);
         
         Credentials credentials2 = new Credentials();
-        credentials2.setUserName("hagos");
+        credentials2.setUsername("hagos");
         credentials2.setPassword("123");
         credentials2.setAuthority(authority);
         credentials2.setEnabled(true);
@@ -99,7 +99,7 @@ public class InitServiceImpl {
         userService.save(user2);
 
         Credentials credentials3 = new Credentials();
-        credentials3.setUserName("mewael");
+        credentials3.setUsername("mewael");
         credentials3.setPassword("123");
         credentials3.setAuthority(authority);
         credentials3.setEnabled(true);
