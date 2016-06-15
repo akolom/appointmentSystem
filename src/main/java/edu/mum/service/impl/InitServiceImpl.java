@@ -64,14 +64,14 @@ public class InitServiceImpl {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         Credentials credentials = new Credentials();
-        credentials.setUsername("user");
-        credentials.setPassword("user");
+        credentials.setUsername("akolom");
+        credentials.setPassword("akolom");
         credentials.setAuthority(authority);
         credentials.setEnabled(true);
 
         Credentials credentials1 = new Credentials();
-        credentials1.setUsername("admin");
-        credentials1.setPassword("admin");
+        credentials1.setUsername("sam");
+        credentials1.setPassword("sam");
         credentials1.setAuthority(authority1);
         credentials1.setEnabled(true);
 
@@ -95,13 +95,13 @@ public class InitServiceImpl {
         
         Credentials credentials2 = new Credentials();
         credentials2.setUsername("hagos");
-        credentials2.setPassword("123");
+        credentials2.setPassword("hagos");
         credentials2.setAuthority(authority);
         credentials2.setEnabled(true);
         
         User user2 = new User();
         user2.setFirstName("Hagos");
-        user2.setLastName("Dov");
+        user2.setLastName("Haile");
         user2.setEmail("jobs@gmail.com");
         user2.setContact("9898989898");
         user2.setCredentials(credentials2);
@@ -109,7 +109,7 @@ public class InitServiceImpl {
 
         Credentials credentials3 = new Credentials();
         credentials3.setUsername("mewael");
-        credentials3.setPassword("123");
+        credentials3.setPassword("mewael");
         credentials3.setAuthority(authority);
         credentials3.setEnabled(true);
         
