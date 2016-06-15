@@ -77,6 +77,7 @@ public class LoginManagedBean implements Serializable {
     }
 
     public void logout() {
+        userLogin=null;
         FacesContext ctx = FacesContext.getCurrentInstance();
 
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
@@ -95,7 +96,7 @@ public class LoginManagedBean implements Serializable {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         for (User user : users) {
             boolean passwordMatch = encoder.matches(credentialBean.getPassword(), user.getCredentials().getPassword());
-            if (user.getCredentials().getUserName().equalsIgnoreCase(credentialBean.getUsername())
+            if (user.getCredentials().getUsername().equalsIgnoreCase(credentialBean.getUsername())
                     && passwordMatch) {
                 return user;
             }

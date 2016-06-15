@@ -7,6 +7,10 @@ package edu.mum.bean;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -15,34 +19,42 @@ import javax.inject.Named;
 @Named("userBean")
 @RequestScoped
 public class UserBean {
-        private String email;
-
+    @NotEmpty(message = "{userbean_email_notempty}")
+    @Email(message = "{userbean_email_notempty}")
+    private String email;
+    @NotNull(message = "{userbean_firstname_notempty}")
+    @NotEmpty(message = "{userbean_firstname_notempty}")
     private String firstName;
-
+    @NotNull(message = "{userbean_lastname_notempty}")
+    @NotEmpty(message = "{userbean_lastname_notempty}")
     private String lastName;
 
     private String contact;
     
     private boolean status;
-    private String UserName;
-    private String Pasword;
+    @NotEmpty(message = "{userbean_username_error}")
+     @Size(min=2, max=30,message = "{userbean_username_error}")
+    private String username;
+        @NotEmpty(message = "{userbean_password_error}")
+      @Size(min=4, max=30,message = "{userbean_password_error}")
+    private String pasword;
 
-    public String getUserName() {
-        return UserName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPasword() {
-        return Pasword;
+        return pasword;
     }
 
-    public void setPasword(String Pasword) {
-        this.Pasword = Pasword;
+    public void setPasword(String pasword) {
+        this.pasword = pasword;
     }
-    
+
 
     public String getEmail() {
         return email;

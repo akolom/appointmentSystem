@@ -55,13 +55,13 @@ public class InitServiceImpl {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         Credentials credentials = new Credentials();
-        credentials.setUserName("user");
+        credentials.setUsername("user");
         credentials.setPassword("user");
         credentials.setAuthority(authority);
         credentials.setEnabled(true);
 
         Credentials credentials1 = new Credentials();
-        credentials1.setUserName("admin");
+        credentials1.setUsername("admin");
         credentials1.setPassword("admin");
         credentials1.setAuthority(authority1);
         credentials1.setEnabled(true);
