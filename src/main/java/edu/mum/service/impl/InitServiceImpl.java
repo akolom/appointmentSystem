@@ -12,6 +12,7 @@ package edu.mum.service.impl;
 import edu.mum.domain.Authority;
 import edu.mum.domain.Credentials;
 import edu.mum.domain.User;
+import edu.mum.scheduler.ScheduleTask;
 import edu.mum.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +35,8 @@ public class InitServiceImpl {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ScheduleTask scheduleTask;
     /**
      * This method executes after finishing dependency injections and invoked
      * before any class is put into service.
