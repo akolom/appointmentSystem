@@ -77,13 +77,39 @@ public class InitServiceImpl {
         userService.save(user);
 
         User user1 = new User();
-        user1.setFirstName("steve");
-        user1.setLastName("jobs");
+        user1.setFirstName("Chi");
+        user1.setLastName("Dov");
         user1.setEmail("jobs@gmail.com");
         user1.setContact("9898989898");
         user1.setCredentials(credentials1);
-
         userService.save(user1);
+        
+        Credentials credentials2 = new Credentials();
+        credentials2.setUserName("hagos");
+        credentials2.setPassword("123");
+        credentials2.setAuthority(authority);
+        credentials2.setEnabled(true);
+        
+        User user2 = new User();
+        user2.setFirstName("Hagos");
+        user2.setLastName("Dov");
+        user2.setEmail("jobs@gmail.com");
+        user2.setContact("9898989898");
+        user2.setCredentials(credentials2);
+        userService.save(user2);
 
+        Credentials credentials3 = new Credentials();
+        credentials3.setUserName("mewael");
+        credentials3.setPassword("123");
+        credentials3.setAuthority(authority);
+        credentials3.setEnabled(true);
+        
+        User user3 = new User();
+        user3.setFirstName("Mewael");
+        user3.setLastName("Zere");
+        user3.setEmail("jobs@gmail.com");
+        user3.setContact("9898989898");
+        user3.setCredentials(credentials3);
+        userService.save(user3);
     }
 }

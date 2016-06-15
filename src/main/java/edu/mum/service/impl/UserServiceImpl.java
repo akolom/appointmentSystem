@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         user.getCredentials().setEnabled(true);
         user.getCredentials().setPassword(encoder.encode(user.getCredentials().getPassword()));
 //        String authorityName = user.getCredentials().getAuthority().getName();
-        
+
         userDao.update(user);
 
     }
@@ -43,15 +43,10 @@ public class UserServiceImpl implements UserService {
         return userDao.findAll();
     }
 
-    
-    
-
     @Override
     public User update(User user) {
-       return userDao.update(user);
+        return userDao.update(user);
     }
-
-   
 
     @Override
     public User findUserById(Integer id) {
@@ -60,9 +55,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    
+    @Override
+    public List<User> findAllExceptThisUserId(Integer id) {
+        return userDao.findAllExceptThisUserId(id);
+    }
 
-
-
-    
 }

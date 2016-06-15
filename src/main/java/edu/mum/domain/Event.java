@@ -15,9 +15,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -42,11 +46,17 @@ public class Event implements Serializable {
     private int duration;
 
     private String description;
+    
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User eventOwner;
+    
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<EventRegister> eventDetails = new ArrayList<>();
 
     public List<EventRegister> getEventDetails() {
@@ -113,12 +123,22 @@ public class Event implements Serializable {
         this.description = description;
     }
 
+    public User getEventOwner() {
+        return eventOwner;
+    }
+
+    public void setEventOwner(User eventOwner) {
+        this.eventOwner = eventOwner;
+    }
+    
+    
+
     public String formatStartDate() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(startTime);
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm a").format(startTime);
     }
 
     public String formatDueDate() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(endTime);
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm a").format(endTime);
     }
 
     public void addUser(User user) {

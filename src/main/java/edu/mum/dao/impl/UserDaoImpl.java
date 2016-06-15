@@ -7,6 +7,8 @@ package edu.mum.dao.impl;
 
 import edu.mum.dao.UserDao;
 import edu.mum.domain.User;
+import java.util.List;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,6 +31,16 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     public User findUserById(Integer id) {
         User user = entityManager.find(User.class, id);
         return user;
-    }    
+    }
+
+    @Override
+    public List<User> findAllExceptThisUserId(Integer id) {
+
+        Query query = this.entityManager.createQuery("SELECT u FROM User u where u.id!=:id");
+
+        query.setParameter("id", id);
+
+        return query.getResultList();
+    }
 
 }

@@ -6,20 +6,14 @@
 package edu.mum.dao;
 
 import edu.mum.domain.Event;
+import edu.mum.domain.EventRegister;
 import java.util.List;
 
 /**
  *
  * @author HAGOS
  */
-public interface EventsDao extends GenericDao<Event> {
-
-    public Event findById(Integer Id);
-
-    public List<Event> findInvitedEventsByUserId(int userId);
-
-    public List<Event> findEventsByUserId(int userId);
-
-    public void deleteEvent(Event event);
-
+public interface EventRegisterDao extends GenericDao<EventRegister>{
+    public List<EventRegister> getEventRegisterByUserId(int id);
+    public List<EventRegister> getNotSelectedEventRegisterByEventId(int eventId);
 }

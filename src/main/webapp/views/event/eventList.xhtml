@@ -56,15 +56,12 @@ and open the template in the editor.
                             </p:cellEditor>-->
                         </p:column>
 
-                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}" style="width:105px">
+                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}">
                             <h:outputText value="#{event.formatStartDate()}" />
-<!--                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="# {product.formatStartDate()}" /></f:facet>
-                                <f:facet name="input"><p:calendar value="# {product.formatStartDate()}" /></f:facet>
-                            </p:cellEditor>-->
+
                         </p:column>
 
-                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}" style="width:105px">
+                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}" >
                             <h:outputText value="#{event.formatDueDate()}" />
                         </p:column>
 
@@ -72,12 +69,8 @@ and open the template in the editor.
                             <h:outputText value="#{event.description}" />
                         </p:column>
                         
-<!--                        <p:column  filterBy="#{event.firstname} #{event.userId.lastname}"  headerText="#{msgs.eventOwner}" sortBy="# {event.userId.firstname} # {event.userId.lastname}">
 
-                            <h:outputText value="#{event.userId.firstname} #{event.userId.lastname}" />
-                        </p:column>-->
-
-                        <p:column style="width:25px">
+                        <p:column>
                             <p:rowEditor />
                             <p:commandLink action="# {eventManagedBean.editProduct(# {event.id})}" value="Edit" />
                         </p:column>

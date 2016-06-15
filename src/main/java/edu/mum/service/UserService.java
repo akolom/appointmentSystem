@@ -29,4 +29,6 @@ public interface UserService {
 //	
 //
 //	public void saveUserInEvents(Events Events, User user);
+    
+        public List<User> findAllExceptThisUserId(Integer id);
 }

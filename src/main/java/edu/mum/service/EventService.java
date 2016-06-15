@@ -20,4 +20,5 @@ public interface EventService {
     public void update(Event event);
     public void save(Event event);
   public List<Event> findEventsByUserId(int userId);
+  public List<Event> findInvitedEventsByUserId(int userId);
 }

@@ -16,15 +16,17 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author matt
  */
-@Named(value = "userMangedBean")
-@SessionScoped
+//@Named(value = "userMangedBean")
+//@SessionScoped
 @Component
+@Scope("session")
 public class UserMangedBean implements Serializable {
 
     @Inject

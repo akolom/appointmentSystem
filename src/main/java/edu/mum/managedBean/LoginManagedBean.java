@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,10 @@ import org.springframework.stereotype.Component;
  *
  * @author matt
  */
-@Named(value = "loginManagedBean")
-@SessionScoped
+//@Named(value = "loginManagedBean")
+//@SessionScoped
 @Component
+@Scope("session")
 public class LoginManagedBean implements Serializable {
 
     private User userLogin;
@@ -70,7 +72,7 @@ public class LoginManagedBean implements Serializable {
             facesContext.addMessage(null, new FacesMessage("Login Failed!"));
             return "login";
         } else {
-            return "welcome?faces-redirect=true";
+            return "event/welcome?faces-redirect=true";
         }
     }
 

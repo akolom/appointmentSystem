@@ -28,7 +28,7 @@ and open the template in the editor.
             <ui:define name="content">
                 <h:form id="form">
                     <p:growl id="msgs" showDetail="true"/>
-                    <p:dataTable value="#{registerManagedBean.regisgerEvent()}" var="event" 
+                    <p:dataTable value="#{registerManagedBean.eventInvitations()}" var="event" 
                                  editable="true" resizableColumns="true" style="margin-top:20px; margin-bottom: 20px" 
                                  paginator="true" rows="13" paginatorPosition="bottom"
                                  widgetVar="eventTable" emptyMessage="No event backlog found with given criteria">
@@ -54,7 +54,7 @@ and open the template in the editor.
                             </p:cellEditor>-->
                         </p:column>
 
-                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}" style="width:105px">
+                        <p:column headerText="#{msgs.eventStartDate}" sortBy="#{event.formatStartDate()}">
                             <h:outputText value="#{event.formatStartDate()}" />
 <!--                            <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="# {product.formatStartDate()}" /></f:facet>
@@ -62,7 +62,7 @@ and open the template in the editor.
                             </p:cellEditor>-->
                         </p:column>
 
-                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}" style="width:105px">
+                        <p:column headerText="#{msgs.eventDueDate}" sortBy="#{event.formatDueDate()}">
                             <h:outputText value="#{event.formatDueDate()}" />
                         </p:column>
 
@@ -72,9 +72,9 @@ and open the template in the editor.
                         
 
 
-                        <p:column style="width:25px">
+                        <p:column style="width:80px">
                             <p:rowEditor />
-                            <p:commandLink action="# {registerManagedBean.editProduct(# {event.id})}" value="Edit" />
+                            <p:commandLink action="#{registerManagedBean.registerForEvent(event)}" value="Register" />
                         </p:column>
 
                     </p:dataTable>

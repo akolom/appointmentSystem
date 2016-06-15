@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+
+                    <h3>Register Events</h3><br/>
+                    <h:panelGrid id="grid" columns="2" style="margin-bottom:10px" cellpadding="5">
+
+                        <h3> <p:outputLabel value="Event Name : #{registerManagedBean.event.name}" /></h3>
+                        <h3><p:outputLabel value="Event DESC : #{registerManagedBean.event.description}" /></h3>
+                        <h3> <p:outputLabel value="Start Date : #{registerManagedBean.event.formatStartDate()}" /></h3>
+                        <h3><p:outputLabel value="End Date   : #{registerManagedBean.event.formatDueDate()}" /></h3>
+                        <h3> <p:outputLabel value="Select Event Time   : " ></p:outputLabel></h3>
+                        <h3>
+                            <p:selectOneMenu id="eventDetail" value="#{registerManagedBean.eventRegisteredId}" style="width:300px" validator="#{eventRegisterValidator.validate}">
+                                <f:selectItems value="#{registerManagedBean.eventDetails}" var="eventDetail" 
+                                               itemLabel="#{eventDetail.startTime} - #{eventDetail.endTime}" itemValue="#{eventDetail.id}"/>
+                            </p:selectOneMenu>
+                        </h3>
+                        <p:message for="eventDetail"/>
+                        <!--<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>-->
+                        <p:commandButton  action="#{registerManagedBean.registeredForTheEvent()}" value="submit" update="grid"/>
+                    </h:panelGrid>
+                </h:form>
+
+            </ui:define>
+
+
+        </ui:composition> 
+    </h:body>
+</html>
+

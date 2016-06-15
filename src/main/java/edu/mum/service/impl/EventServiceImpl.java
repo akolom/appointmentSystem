@@ -60,43 +60,6 @@ public class EventServiceImpl implements EventService {
 
     }
 
-//    @Override
-//    public List<Events> findAllByUser(User user) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public Events findById(Integer id) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//    @Override
-//    public List<Events> findAllAppliedEvents(Integer userId) {
-//        List<Integer> eventId = eventsDao.findAllEventIdByUserId(userId);
-//        List<Events> events = new ArrayList<>();
-//        if (eventId == null || eventId.isEmpty()) {
-//
-//            return events;
-//        }
-//
-//        for (Integer eId : eventId) {
-//
-//            events.add(eventsDao.findById(eId));
-//
-//        }
-//        return events;
-//    }
-//
-//    @Override
-//    public List<Events> findAllNotAppliedEvents(String key, Integer userId) {
-//
-//        List<Integer> ids = eventsDao.findAllNotAppliedEvents(userId);
-//        List<Events> events = new ArrayList<>();
-//        if (ids == null || ids.isEmpty()) {
-//            System.out.println("null return --> findall");
-//            return events;
-//        }
-//        return eventsDao.findByDescriptionByNotApplied(ids, key);
-//    }
     @Override
     public void update(Event event) {
         eventsDao.update(event);
@@ -121,5 +84,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> findEventsByUserId(int userId) {
         
         return eventsDao.findEventsByUserId(userId);
+    }
+
+    @Override
+    public List<Event> findInvitedEventsByUserId(int userId) {
+        return eventsDao.findInvitedEventsByUserId(userId);
     }
 }

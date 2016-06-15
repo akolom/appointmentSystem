@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
@@ -26,17 +27,19 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author akolom
  */
-@Named(value = "eventManagedBean")
-@ConversationScoped
+//@Named(value = "eventManagedBean")
+//@SessionScoped
 @Component
+@Scope("session")
 public class EventManagedBean implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
 
     /**
@@ -44,68 +47,73 @@ public class EventManagedBean implements Serializable {
      */
     @Inject
     private EventBean eventBean;
-
+    @Inject
+    private LoginManagedBean loginManagedBean;
     @Autowired
     private EventService eventService;
-
+    
     @Autowired
     private UserService userService;
-
+    
     private List<Event> eventList;
     
     private List<User> users;
-
+    
     public EventManagedBean() {
     }
-
+    
     @PostConstruct
     public void init() {
         eventList = eventService.findAll();
         users = userService.findAll();
     }
-    public void refreshUser(){
-        eventBean=new EventBean();
+
+    public void refreshUser() {
+        eventBean = new EventBean();
         users = userService.findAll();
     }
+
     public EventBean getEventBean() {
         return eventBean;
     }
-
+    
     public void setEventBean(EventBean eventBean) {
         this.eventBean = eventBean;
     }
-
+    
     public EventService getEventService() {
         return eventService;
     }
-
+    
     public void setEventService(EventService eventService) {
         this.eventService = eventService;
     }
-
+    
     public List<User> getUsers() {
-        return users;
+        
+        return userService.findAllExceptThisUserId(loginManagedBean.getUserLogin().getId());
     }
-
+    
     public void setUsers(List<User> users) {
         this.users = users;
     }
     
     public List<Event> getEventList() {
-        return eventService.findAll();
+        return eventService.findEventsByUserId(loginManagedBean.getUserLogin().getId());
     }
-
+    
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
     }
-
+    
     public String createEvent() {
-        List<User> users=new ArrayList<>();
+        List<User> users = new ArrayList<>();
         for (String id : eventBean.getUsers()) {
-            User user=userService.findUserById(Integer.parseInt(id));
+            User user = userService.findUserById(Integer.parseInt(id));
             users.add(user);
         }
-        Event event=new Event();
+        Event event = new Event();
+        event.setEventOwner(loginManagedBean.getUserLogin());
         event.setName(eventBean.getName());
         event.setDescription(eventBean.getDescription());
         event.setStartTime(eventBean.getStartTime());
@@ -125,7 +133,7 @@ public class EventManagedBean implements Serializable {
 
         return "eventList.jsf";
     }
-
+    
     public void editEvent(RowEditEvent event) throws IOException {
 //        FacesMessage msg = new FacesMessage("Product Backlog Edited", ((Product) event.getObject()).getId().toString());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -139,12 +147,10 @@ public class EventManagedBean implements Serializable {
 //        NavigationHandler navigationHandler = ctx.getApplication().getNavigationHandler();
 //        navigationHandler.handleNavigation(ctx, null, "productForm");
     }
-
+    
     public void cancelEditEvent(RowEditEvent event) {
 //        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Product) event.getObject()).getId().toString());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    
     
 }
