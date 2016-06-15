@@ -7,7 +7,9 @@ package edu.mum.bean;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -16,9 +18,10 @@ import javax.validation.constraints.Size;
 @Named("credentialBean")
 @RequestScoped
 public class CredentialBean {
-   
+
+    @NotEmpty(message = "Username is required")
     private String username;
-   
+    @NotEmpty(message = "Password is required")
     private String password;
 
     public String getUsername() {

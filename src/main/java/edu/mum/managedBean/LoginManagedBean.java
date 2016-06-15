@@ -60,6 +60,12 @@ public class LoginManagedBean implements Serializable {
     public String getFullName() {
         return userLogin.getFirstName() + " " + userLogin.getLastName();
     }
+    public boolean isAdmin(){
+        if(userLogin==null) return false;
+        else{
+            return userLogin.getCredentials().getAuthority().getName().equals("Admin");
+        }
+    }
     @Autowired
     private UserService userService;
 

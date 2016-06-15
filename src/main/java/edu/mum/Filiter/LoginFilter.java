@@ -76,7 +76,7 @@ public class LoginFilter implements Filter {
         if (debug) {
             log("LoginFilter:DoAfterProcessing");
         }
-
+        
         // Write code here to process the request and/or response after
         // the rest of the filter chain is invoked.
         // For example, a logging filter might log the attributes on the
@@ -115,12 +115,13 @@ public class LoginFilter implements Filter {
 
         doBeforeProcessing(request, response);
 
+        Throwable problem = null;
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        Throwable problem = null;
         User loginUser = null;
         // managed bean name is exactly the session attribute name
-        LoginManagedBean login= (LoginManagedBean)req.getSession().getAttribute("loginManagedBean");
+        LoginManagedBean login = (LoginManagedBean) req.getSession().getAttribute("loginManagedBean");
         try {
             loginUser = login.getUserLogin();
         } catch (NullPointerException e) {
@@ -129,7 +130,6 @@ public class LoginFilter implements Filter {
             // rethrow the problem after that.
 
         }
-        
         try {
             String url = req.getServletPath();
             if (!url.contains("login") && !(url.contains("userRegistration"))) {
@@ -137,6 +137,12 @@ public class LoginFilter implements Filter {
                     HttpServletResponse httpResponse = (HttpServletResponse) response;
                     httpResponse.sendRedirect(req.getContextPath() + "/views/login.jsf");
                     return;
+                } else if (url.contains("admin")) {
+                    if (!loginUser.getCredentials().getAuthority().getName().equals("Admin")) {
+                        HttpServletResponse httpResponse = (HttpServletResponse) response;
+                        httpResponse.sendRedirect(req.getContextPath() + "/error/403.jsf");
+                        return;
+                    }
                 }
             } else if (url.contains("login")) {
                 if (loginUser != null) {

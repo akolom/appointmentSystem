@@ -17,6 +17,8 @@
                             </p:menu>                
                         </h:form>-->
             <h3 style="margin-top:0">Menu</h3>
+            <h:button outcome="admin" value="Adminstrator" rendered="#{loginManagedBean.admin}"/>
+            <br/><br/>
             <h:button outcome="eventForm" value="Create Event"/>
             <br/><br/>
             <h:button outcome="eventList" value="My Event List"/>

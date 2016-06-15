@@ -38,8 +38,9 @@
 
                                 <p:outputLabel for="password" value="#{msgs.loginPassword}: " />
                                 <p:password id="password" value="#{loginManagedBean.credentialBean.password}" />
-                                <p:commandButton action="#{loginManagedBean.signup()}" value="Sign Up"/>
-                                <p:commandButton action="#{loginManagedBean.login()}" value="Login"/>
+                                
+                                <p:commandButton action="#{loginManagedBean.login()}" value="Login" update="grid"/>
+                                <p:commandButton action="#{loginManagedBean.signup()}" value="Sign Up" immediate="true"/>
 
                             </h:panelGrid>   
                             <p style="color: red">#{sessionScope.error}</p>
