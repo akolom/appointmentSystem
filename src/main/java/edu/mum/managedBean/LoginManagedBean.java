@@ -26,8 +26,8 @@ import org.springframework.stereotype.Component;
  *
  * @author matt
  */
-@Named(value = "loginManagedBean")
-@SessionScoped
+//@Named(value = "loginManagedBean")
+//@SessionScoped
 @Component
 public class LoginManagedBean implements Serializable {
 
@@ -70,11 +70,12 @@ public class LoginManagedBean implements Serializable {
             facesContext.addMessage(null, new FacesMessage("Login Failed!"));
             return "login";
         } else {
-            return "welcome?faces-redirect=true";
+            return "views/welcome?faces-redirect=true";
         }
     }
 
     public void logout() {
+        userLogin=null;
         FacesContext ctx = FacesContext.getCurrentInstance();
 
         HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
@@ -93,7 +94,7 @@ public class LoginManagedBean implements Serializable {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         for (User user : users) {
             boolean passwordMatch = encoder.matches(credentialBean.getPassword(), user.getCredentials().getPassword());
-            if (user.getCredentials().getUserName().equalsIgnoreCase(credentialBean.getUsername())
+            if (user.getCredentials().getUsername().equalsIgnoreCase(credentialBean.getUsername())
                     && passwordMatch) {
                 return user;
             }

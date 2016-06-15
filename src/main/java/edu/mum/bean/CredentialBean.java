@@ -7,16 +7,18 @@ package edu.mum.bean;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author akolom
+ * @author matt
  */
 @Named("credentialBean")
 @RequestScoped
 public class CredentialBean {
-
+   
     private String username;
+   
     private String password;
 
     public String getUsername() {

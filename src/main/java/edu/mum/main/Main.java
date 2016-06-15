@@ -47,7 +47,7 @@ public class Main {
         event.setEndTime(d2);
 
         Credentials credentials1 = new Credentials();
-        credentials1.setUserName("admin");
+        credentials1.setUsername("admin");
         credentials1.setPassword("admin");
         credentials1.setEnabled(true);
 

@@ -1,49 +1,77 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>-->
+        <title>Facelets Template</title>
     </h:head>
 
-    <f:view>
+    <h:body>
 
+        <div id="top">
+            
+            <ui:insert name="top"><div align="center"  ><h><b>Registration</b></h></div></ui:insert>
+        </div>
 
-        <h:body>
-            <!--            <ui:composition template="/templates/masterLayout.xhtml">-->
-            <!--            <ui:define name="content">-->
-            <h:form>
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+             <h:form>
 
                 <div>
-                    <h:panelGrid id="grid" columns="2" cellpadding="5" cellspacing="5">
-                        <p:outputLabel for="fname" >#{msgs.registrationFirstname}</p:outputLabel>
-                        <p:inputText id="fname" value="#{userMangedBean.userBean.firstName}" requiredMessage="First Name Reqired" required="true"/>
-
+                    <p:growl id="msgs" showDetail="true"/>
+                    <h:panelGrid id="grid" columns="3" cellpadding="5" cellspacing="5">
+                        
+                        <p:outputLabel  for="fname" >#{msgs.registrationFirstname}</p:outputLabel>
+                        <p:inputText id="fname" value="#{userMangedBean.userBean.firstName}" />
+                        <p:message  for="fname" />
+                        
                         <p:outputLabel for="lname">#{msgs.registrationLastname}</p:outputLabel>
-                        <p:inputText id="lname" value="#{userMangedBean.userBean.lastName}" requiredMessage="Last Name Required" required="true"/>
+                        <p:inputText id="lname" value="#{userMangedBean.userBean.lastName}" />
+                        <p:message for="lname"/>
+                        
                         <p:outputLabel for="email">Email:</p:outputLabel>
-                        <p:inputText id="email" value="#{userMangedBean.userBean.email}" requiredMessage="Email Required" required="true"/>
-
+                        <p:inputText id="email" value="#{userMangedBean.userBean.email}"/>
+                        <p:message for="email"/>
+                        
                         <p:outputLabel for="contact">Contact:</p:outputLabel>
-                        <p:inputText id="contact" value="#{userMangedBean.userBean.contact}" requiredMessage="Email Required" required="true"/>
+                        <p:inputText id="contact" value="#{userMangedBean.userBean.contact}"/>
+                        <p:message for="contact"/>
+                        
                         <p:outputLabel for="username">User Name</p:outputLabel>
-
-                        <p:inputText id="username" value="#{userMangedBean.userBean.userName}" requiredMessage="Email Required" required="true"/>
-
+                        <p:inputText id="username" value="#{userMangedBean.userBean.username}"/>
+                        <p:message for="username"/>
+                        
                         <p:outputLabel for="password">Password</p:outputLabel>
-                        <p:password id="password" value="#{userMangedBean.userBean.pasword}" requiredMessage="Email Required" required="true"/>
+                        <p:password id="password" value="#{userMangedBean.userBean.pasword}" />
+                        <p:message for="password"/>
+                        
                         <p:commandButton value="Cancel" action="login.jsf" immediate="true" />
-                        <p:commandButton value="Add" action="#{userMangedBean.addUser()}" />
+                        <p:commandButton value="Add" action="#{userMangedBean.addUser()}" update="grid"  />
                     </h:panelGrid>
                 </div>
             </h:form>
-            <!--</ui:define>-->
-            <!--</ui:composition>-->
-        </h:body>
+            
+            
+            </ui:insert>
+        </div>
 
-    </f:view>
+        <div id="bottom">
+            <ui:insert name="bottom">
+                 <div class="modal-footer">
+                        <div class="col-md-12">
+                            <span>#{msgs.footer}</span>
+                        </div>
+                    </div>
+                
+            </ui:insert>
+        </div>
+
+    </h:body>
+
 </html>
-
