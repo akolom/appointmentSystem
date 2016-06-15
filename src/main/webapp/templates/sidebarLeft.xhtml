@@ -10,23 +10,19 @@
     </h:head>
     <h:body>
         <ui:composition>   
-            <!--            <h:form>
-                            <p:growl id="messages" showDetail="false"/>
-                            <p:menu model="#{menuView.model}" toggleable="true" >
-            
-                            </p:menu>                
-                        </h:form>-->
-            <h3 style="margin-top:0">Menu</h3>
-            <h:button outcome="admin" value="Adminstrator" rendered="#{loginManagedBean.admin}"/>
-            <br/><br/>
-            <h:button outcome="eventForm" value="Create Event"/>
-            <br/><br/>
-            <h:button outcome="eventList" value="My Event List"/>
-            <br/><br/>
-            
-            <h:button outcome="eventInvitation" value="Event Invitation"/>
-            
-            <h:button outcome="myRegisteredEvent" value="My Registered Event"/>
+            <h:form>
+            <p:menu>                
+                <p:submenu label="Admin" rendered="#{loginManagedBean.admin}">
+                    <p:menuitem value="Slot Duration" outcome="admin" icon="ui-icon-star" />
+                </p:submenu>
+                <p:submenu label="Event" >
+                    <p:menuitem value="Create Event" outcome="eventForm" icon="ui-icon-star" />
+                    <p:menuitem value="My Event List" outcome="eventList" icon="ui-icon-star" />
+                    <p:menuitem value="Event Invitation" outcome="eventInvitation" icon="ui-icon-star" />
+                    <p:menuitem value="My Registered Event" outcome="myRegisteredEvent" icon="ui-icon-star" />
+                </p:submenu>
+            </p:menu>
+            </h:form>
         </ui:composition>
     </h:body>
 </html>
